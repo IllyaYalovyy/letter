@@ -99,6 +99,7 @@ public class Mail.Window : Adw.ApplicationWindow {
     private bool clamping_split_mail;
 
     private Settings settings;
+    private AccountAvatars account_avatars = new AccountAvatars ();
     private Gtk.ListBox account_list;
     private Gtk.ListBox folder_list;
     private Gtk.ListView message_list;
@@ -308,6 +309,7 @@ public class Mail.Window : Adw.ApplicationWindow {
         if (this.folder_split.collapsed)
             on_folder_split_collapsed ();
         this.settings.changed["account-rail"].connect (apply_account_rail);
+        this.settings.changed["account-avatars"].connect (fill_account_rail);
         apply_account_rail ();
         this.content_split.position = this.settings.get_int ("folder-pane-width")
             .clamp (FOLDER_PANE_MIN, FOLDER_PANE_MAX);
@@ -2822,6 +2824,8 @@ public class Mail.Window : Adw.ApplicationWindow {
                 group = button;
             button.set_data ("account", account);
             button.child = Utils.account_brand_image (account, 28);
+            if (this.settings.get_boolean ("account-avatars"))
+                show_account_avatar.begin (button, account);
             button.toggled.connect (() => {
                 if (!button.active || this.selecting_account)
                     return;
@@ -2847,6 +2851,15 @@ public class Mail.Window : Adw.ApplicationWindow {
         if (this.selected_account != null)
             sync_account_selection (this.selected_account);
         this.selecting_account = guard;
+    }
+
+    private async void show_account_avatar (Gtk.ToggleButton button, Account account) {
+        var goa = (get_application () as Application)?.accounts.goa;
+        if (goa == null)
+            return;
+        var picture = yield this.account_avatars.load (goa, account);
+        if (picture != null)
+            button.child = new Adw.Avatar (28, account.display_name, false) { custom_image = picture };
     }
 
     private void sync_account_row_sizes () {
