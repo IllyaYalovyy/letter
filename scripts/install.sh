@@ -111,7 +111,7 @@ install_packages() {
         git meson ninja vala blueprint-compiler pkgconf gcc \
         gtk4 libadwaita gdk-pixbuf2 \
         evolution-data-server gnome-online-accounts \
-        webkitgtk-6.0 gsound gettext appstream desktop-file-utils
+        webkitgtk-6.0 gnutls gsound gettext appstream desktop-file-utils
       try_packages pacman -S --needed --noconfirm \
         evolution-ews sushi hunspell hunspell-en_us
       ;;
@@ -122,7 +122,7 @@ install_packages() {
         git meson ninja vala blueprint-compiler pkgconf-pkg-config gcc \
         gtk4-devel libadwaita-devel gdk-pixbuf-devel \
         evolution-data-server-devel gnome-online-accounts-devel \
-        webkitgtk4-devel gsound-devel libical-devel \
+        webkitgtk4-devel libgnutls-devel gsound-devel libical-devel \
         gettext-tools AppStream desktop-file-utils
       try_packages zypper --non-interactive install --no-recommends \
         evolution-ews sushi hunspell hunspell-en
@@ -133,7 +133,7 @@ install_packages() {
         git meson ninja-build vala blueprint-compiler pkgconf-pkg-config gcc \
         gtk4-devel libadwaita-devel gdk-pixbuf2-devel \
         evolution-data-server-devel gnome-online-accounts-devel \
-        webkitgtk6.0-devel gsound-devel gettext appstream desktop-file-utils
+        webkitgtk6.0-devel gnutls-devel gsound-devel gettext appstream desktop-file-utils
       try_packages dnf install -y evolution-ews sushi hunspell hunspell-en
       ;;
     apt)
@@ -145,7 +145,7 @@ install_packages() {
         libgtk-4-dev libadwaita-1-dev libgdk-pixbuf-2.0-dev \
         libcamel1.2-dev libedataserver1.2-dev libedataserverui4-dev \
         libebook1.2-dev libecal2.0-dev libical-dev \
-        libgoa-1.0-dev libwebkitgtk-6.0-dev libgsound-dev \
+        libgoa-1.0-dev libwebkitgtk-6.0-dev libgnutls28-dev libgsound-dev \
         gettext appstream desktop-file-utils
       try_packages apt-get install -y evolution-ews gnome-sushi hunspell hunspell-en-us
       ;;

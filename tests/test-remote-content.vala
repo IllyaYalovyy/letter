@@ -1,6 +1,7 @@
 class RequestLog : Object {
     public GenericArray<string> paths = new GenericArray<string> ();
     public string base_uri;
+    public uint connections;
     private SocketService service = new SocketService ();
 
     public RequestLog () throws Error {
@@ -14,6 +15,7 @@ class RequestLog : Object {
         );
         this.base_uri = "http://127.0.0.1:%u".printf (((InetSocketAddress) bound).port);
         this.service.incoming.connect ((connection) => {
+            this.connections++;
             serve.begin (connection);
             return true;
         });
@@ -23,7 +25,15 @@ class RequestLog : Object {
     private async void serve (SocketConnection connection) {
         try {
             var input = new DataInputStream (connection.input_stream);
-            var request = yield input.read_line_async ();
+            uint8[] prefix = new uint8[1];
+            if ((yield input.read_async (prefix)) != 1)
+                return;
+            if (prefix[0] == 0x16) {
+                yield connection.close_async ();
+                return;
+            }
+            var rest = yield input.read_line_async ();
+            var request = ((char) prefix[0]).to_string () + (rest ?? "");
             var parts = (request ?? "").split (" ");
             if (parts.length >= 2)
                 this.paths.add (parts[1]);
@@ -126,6 +136,46 @@ void assert_no_active_content (string path_prefix) {
     }
 }
 
+void test_image_recovery_does_not_fetch_untrusted_https () {
+    var settings = new Settings (Config.APP_ID);
+    settings.set_boolean ("recover-remote-images", true);
+    var before = requests.connections;
+    var content = hostile_message ("stranger@evil.example", "/unused");
+    content.html = "<img src=\"%s/untrusted-https.png\">".printf (requests.base_uri.replace ("http:", "https:"));
+    var reader = new Mail.MessageReader ();
+    var window = show (reader);
+    reader.show_content (content);
+    spin (2000);
+    assert (requests.connections == before);
+    window.destroy ();
+    settings.reset ("recover-remote-images");
+}
+
+void test_image_recovery_is_optional () {
+    var settings = new Settings (Config.APP_ID);
+    assert (!settings.get_boolean ("recover-remote-images"));
+    settings.set_strv ("trusted-senders", { "friend@example.com" });
+    var content = hostile_message ("friend@example.com", "/unused");
+    content.html = "<img src=\"%s/failed.png\">".printf (requests.base_uri.replace ("http:", "https:"));
+    var original_html = content.html;
+    var reader = new Mail.MessageReader ();
+    var window = show (reader);
+    var before = requests.connections;
+    reader.show_content (content);
+    spin (3000);
+    var disabled = requests.connections - before;
+    assert (disabled > 0);
+    before = requests.connections;
+    settings.set_boolean ("recover-remote-images", true);
+    spin (3000);
+    assert (requests.connections - before > disabled);
+    assert (content.html == original_html);
+    assert (content.inline_images == null);
+    window.destroy ();
+    settings.reset ("recover-remote-images");
+    settings.reset ("trusted-senders");
+}
+
 void test_reader_blocks_untrusted_sender () {
     var reader = new Mail.MessageReader ();
     var window = show (reader);
@@ -207,6 +257,8 @@ int main (string[] args) {
     } catch (Error e) {
         error ("Could not start the request log: %s", e.message);
     }
+    Test.add_func ("/remote-content/image-recovery-does-not-fetch-untrusted-https", test_image_recovery_does_not_fetch_untrusted_https);
+    Test.add_func ("/remote-content/image-recovery-is-optional", test_image_recovery_is_optional);
     Test.add_func ("/remote-content/reader-blocks-untrusted-sender", test_reader_blocks_untrusted_sender);
     Test.add_func (
         "/remote-content/reader-blocks-untrusted-sender-without-remote-images",

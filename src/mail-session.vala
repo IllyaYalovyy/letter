@@ -7438,8 +7438,8 @@ public class Mail.InlineImagePages {
         var set = new InlineImageSet ();
         for (uint i = 0; i < content.inline_images.length; i++)
             set.images.add (content.inline_images[i]);
-        pages.set (key, set);
         content.set_data ("letter-inline-pin", new InlineImagePin (key));
+        pages.set (key, set);
     }
 
     public static void drop (string? key) {

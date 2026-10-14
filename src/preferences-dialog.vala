@@ -199,6 +199,17 @@ public class Mail.PreferencesDialog : Adw.PreferencesDialog {
         });
         reading.add (read_row);
 
+        var recovery_row = new Adw.SwitchRow () {
+            title = _("Recover broken remote images"),
+            subtitle = _("Contact certificate providers for images from trusted senders. Some revocation checks are unavailable."),
+            subtitle_lines = 2,
+            active = this.settings.get_boolean ("recover-remote-images"),
+        };
+        recovery_row.notify["active"].connect (() => {
+            this.settings.set_boolean ("recover-remote-images", recovery_row.active);
+        });
+        reading.add (recovery_row);
+
         var conversation_row = new Adw.SwitchRow () {
             title = _("Conversations"),
             subtitle = _("Group related messages into threads."),
