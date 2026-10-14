@@ -209,12 +209,17 @@ headerbar.letter-toolbar button.compose-button image {
   -gtk-icon-size: 16px;
 }
 
-/* Search chrome must not inherit the 28px toolbar button size. */
-headerbar.letter-toolbar .mail-search-clear,
+/* Chip dismiss stays tiny; search clear matches Gtk.SearchEntry affordance. */
 headerbar.letter-toolbar .search-chip-close {
   min-height: 14px;
   min-width: 14px;
   padding: 0;
+}
+
+headerbar.letter-toolbar .mail-search-clear {
+  min-height: 22px;
+  min-width: 22px;
+  padding: 2px;
 }
 
 headerbar button.compose-send {
@@ -799,13 +804,22 @@ text.mail-search-input:focus-within {
 }
 
 .mail-search-clear {
-  min-height: 16px;
-  min-width: 16px;
-  padding: 0;
+  min-height: 22px;
+  min-width: 22px;
+  padding: 2px;
+  border-radius: 6px;
 }
 
 .mail-search-clear image {
-  -gtk-icon-size: 12px;
+  -gtk-icon-size: 16px;
+}
+
+.mail-search-clear:hover {
+  background: color-mix(in srgb, var(--headerbar-fg-color) 14%, transparent);
+}
+
+.mail-search-clear:active {
+  background: color-mix(in srgb, var(--headerbar-fg-color) 22%, transparent);
 }
 
 /* Compact chip: air inside the field, minimal dismiss like compose attachments. */

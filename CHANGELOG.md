@@ -27,6 +27,10 @@ refactors unless they affect behaviour.
   another PC, phone, or Empty Trash stay aligned. Incomplete tips, skipped
   walks, and local-only summaries still keep the longer Letter index.
 
+### Changed
+- Refine mail search clear button styles for improved UI consistency. 
+  Increased dimensions and added hover/active states for better user interaction.
+
 
 ## [1.5.0](https://github.com/stalvatero/letter/compare/v1.0.0...v1.5.0) - 2026-10-08
 
