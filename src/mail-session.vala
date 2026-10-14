@@ -643,6 +643,9 @@ public class Mail.MailSession : Camel.Session {
     public bool last_list_refresh_rewound { get; private set; }
     /* refresh_info ran and returned. Skipped, timed out, and failed walks stay false. */
     public bool last_list_refresh_completed { get; private set; }
+    /* Finished walk and Camel’s UID summary was already near Letter’s list —
+     * safe to accept a catastrophic shrink in the window cache. */
+    public bool last_list_refresh_authoritative { get; private set; }
 
     public async GenericArray<Message> list_messages (
         Account account,
@@ -666,11 +669,16 @@ public class Mail.MailSession : Camel.Session {
         this.last_list_refresh_failed = false;
         this.last_list_refresh_rewound = false;
         this.last_list_refresh_completed = false;
+        this.last_list_refresh_authoritative = false;
         var refresh_completed = true;
         var refresh_performed = false;
+        /* Camel UID count before Graph/IMAP refresh_info — used so a “finished”
+         * walk on a still-tiny local summary cannot wipe Letter’s longer index. */
+        uint camel_uids_before = 0;
         if (refresh
             && refresh_timeout_seconds != REFRESH_INFO_SKIP
             && !folder_has_pending_flags (account, folder)) {
+            camel_uids_before = folder_list_uids (camel_folder).length;
             refresh_performed = true;
             refresh_completed = yield refresh_folder_info (
                 camel_folder,
@@ -686,6 +694,9 @@ public class Mail.MailSession : Camel.Session {
             && refresh_completed
             && !this.last_list_refresh_failed;
         this.last_list_refresh_completed = server_refresh_finished;
+        var letter_n = previous != null ? previous.length : 0;
+        this.last_list_refresh_authoritative = server_refresh_finished
+            && HeaderListPolicy.camel_summary_caught_up (letter_n, camel_uids_before);
 
         if (cancellable != null && cancellable.is_cancelled ())
             throw new IOError.CANCELLED ("Cancelled");
@@ -717,15 +728,12 @@ public class Mail.MailSession : Camel.Session {
          * Catastrophic = incoming + INCOMPLETE_REFRESH_SHRINK_MAX < previous.
          *
          * 1. Incomplete refresh (budget timed out) → keep prior list.
-         *    Partial Graph/Camel summaries are untrusted.
-         * 2. Finished server refresh (server_refresh_finished) → accept the
-         *    shorter list, including empty and large non-empty shrinks.
-         *    Another client / phone / Empty Trash may have removed thousands
-         *    of UIDs since Letter last synced; the server wins.
-         * 3. Gmail Important logs as “complete Important” (same accept).
-         * 4. Local-only / SKIP / pending-flags “refresh” on a large folder
-         *    → keep prior list (no server walk).
-         * 5. Small folders + complete refresh → trust (same as 2).
+         * 2. Finished refresh + Camel already caught up with Letter → accept
+         *    the shorter list (other clients / Empty Trash). If Camel started
+         *    far behind Letter, “finished” is untrusted — keep prior.
+         * 3. Gmail Important logs as “complete Important” (same Camel guard).
+         * 4. Local-only / SKIP / pending-flags on a large folder → keep prior.
+         * 5. Small folders + complete refresh → trust.
          *
          * Empty Trash/Junk *from Letter* clears RAM/disk/high-water first, so
          * previous is already empty before the next list_messages. */
@@ -741,6 +749,7 @@ public class Mail.MailSession : Camel.Session {
                 refresh,
                 refresh_completed,
                 server_refresh_finished,
+                camel_uids_before,
                 out reason
             );
 
@@ -750,12 +759,13 @@ public class Mail.MailSession : Camel.Session {
                 messages = merge_incomplete_refresh_keep (previous, messages);
                 sort_messages_by_date (messages);
                 Utils.sync_log (
-                    "headers “%s” %s — keep %u (reject shrink to %u, +%u tip)".printf (
+                    "headers “%s” %s — keep %u (reject shrink to %u, +%u tip, Camel had %u)".printf (
                         folder.name,
                         reason,
                         kept,
                         partial,
-                        messages.length > kept ? messages.length - kept : 0
+                        messages.length > kept ? messages.length - kept : 0,
+                        camel_uids_before
                     )
                 );
                 merged = true;
@@ -771,11 +781,12 @@ public class Mail.MailSession : Camel.Session {
                 || reason == "complete Important"
                 || reason == "complete server list") {
                 Utils.sync_log (
-                    "headers “%s” %s (%u ← %u)".printf (
+                    "headers “%s” %s (%u ← %u, Camel had %u)".printf (
                         folder.name,
                         reason,
                         messages.length,
-                        previous.length
+                        previous.length,
+                        camel_uids_before
                     )
                 );
             }

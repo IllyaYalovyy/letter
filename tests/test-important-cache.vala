@@ -57,69 +57,91 @@ void main () {
     );
 
     string reason;
+    /* camel_uids_before ≈ previous → finished walk may shrink. */
+    const uint CAUGHT_UP = 7773;
+    const uint CAMEL_BEHIND = 26;
+
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, important, 7773, 3, true, true, true, out reason
+            google, important, 7773, 3, true, true, true, CAUGHT_UP, out reason
         ) && reason == "complete Important",
-        "finished Gmail Important replaces a large list"
+        "finished Gmail Important replaces a large list when Camel is caught up"
     );
     expect (
         Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, important, 7773, 3, true, false, false, out reason
+            google, important, 7773, 3, true, false, false, CAUGHT_UP, out reason
         ) && reason == "incomplete refresh",
         "interrupted Gmail Important keeps the list"
     );
     expect (
         Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, important, 7773, 3, true, true, false, out reason
+            google, important, 7773, 3, true, true, false, CAUGHT_UP, out reason
         ) && reason == "large-folder refuse shrink",
         "skipped Gmail Important refresh keeps the list"
     );
     expect (
         Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, important, 7773, 3, false, true, false, out reason
+            google, important, 7773, 3, false, true, false, CAUGHT_UP, out reason
         ) && reason == "large-folder local refuse shrink",
         "local Important summary keeps the list"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            Mail.AccountKind.MICROSOFT, important, 7773, 3, true, true, true, out reason
+            Mail.AccountKind.MICROSOFT, important, 7773, 3, true, true, true, CAUGHT_UP, out reason
         ) && reason == "complete server list",
-        "finished Microsoft Important trusts the server list"
+        "finished Microsoft Important trusts the server list when Camel is caught up"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, archive, 7773, 3, true, true, true, out reason
+            google, archive, 7773, 3, true, true, true, CAUGHT_UP, out reason
         ) && reason == "complete server list",
-        "finished Archive trusts a large server shrink"
+        "finished Archive trusts a large server shrink when Camel is caught up"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, inbox, 7773, 3, true, true, true, out reason
+            google, inbox, 7773, 3, true, true, true, CAUGHT_UP, out reason
         ) && reason == "complete server list",
-        "finished Inbox trusts a large server shrink"
+        "finished Inbox trusts a large server shrink when Camel is caught up"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, archive, 7773, 0, true, true, true, out reason
+            google, archive, 7773, 0, true, true, true, CAUGHT_UP, out reason
         ) && reason == "complete empty",
-        "a finished empty Archive is accepted"
+        "a finished empty Archive is accepted when Camel is caught up"
+    );
+    expect (
+        Mail.HeaderListPolicy.keep_prior_on_shrink (
+            google, archive, 229, 28, true, true, true, CAMEL_BEHIND, out reason
+        ) && reason == "finished but Camel behind",
+        "finished walk with Camel still tiny keeps Letter’s Conoscenza-sized list"
+    );
+    expect (
+        Mail.HeaderListPolicy.keep_prior_on_shrink (
+            google, archive, 7773, 0, true, true, true, CAMEL_BEHIND, out reason
+        ) && reason == "finished but Camel behind",
+        "finished empty with Camel behind does not wipe a large Letter index"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, important, 200, 40, true, true, true, out reason
+            google, important, 200, 40, true, true, true, 200, out reason
         ) && reason == "complete Important",
-        "a finished small Gmail Important list still replaces"
+        "a finished small Gmail Important list still replaces when Camel is caught up"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, inbox, 200, 40, true, true, true, out reason
+            google, inbox, 200, 40, true, true, true, 200, out reason
         ) && reason == "complete server list",
-        "a finished small Inbox shrink trusts the server"
+        "a finished small Inbox shrink trusts the server when Camel is caught up"
+    );
+    expect (
+        Mail.HeaderListPolicy.keep_prior_on_shrink (
+            google, inbox, 200, 40, true, true, true, 0, out reason
+        ) && reason == "finished but Camel behind",
+        "a finished small Inbox shrink with empty Camel keeps Letter’s list"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
-            google, inbox, 200, 40, true, true, false, out reason
+            google, inbox, 200, 40, true, true, false, 0, out reason
         ) && reason == "small-folder trust shrink",
         "a small Inbox shrink without a server walk is still trusted"
     );

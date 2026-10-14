@@ -3,12 +3,17 @@
  * Incomplete / skipped / local-only walks must not wipe a longer Letter
  * index (Archive tip, budget cancel, REFRESH_INFO_SKIP).
  *
- * A *finished* server refresh is authoritative: Empty Trash, another PC,
- * or a phone may have removed thousands of UIDs since Letter last checked.
- * Server wins over the desktop cache (action after last successful sync).
+ * A *finished* server refresh may be authoritative (Empty Trash, another
+ * PC, phone) — but only when Camel’s UID summary was already roughly in
+ * line with Letter *before* that walk. On Camel/Graph, a tip that times
+ * out leaves a tiny local summary; the next “until-done” can return in
+ * under a second, mark the refresh finished, and still only know about
+ * those few UIDs. Trusting that as “server list” wiped Conoscenza
+ * (229 → 28) on a slow hotspot. Own-engine sync without Camel does not
+ * have this trap; here Camel must be caught up first.
  *
  * Gmail Important keeps an explicit reason string for logs/tests; the same
- * finished-walk rule applies to every other folder.
+ * finished + Camel-caught-up rule applies to every other folder.
  *
  * LARGE and SHRINK_SLOP match MailSession HEADER_LIST_LARGE /
  * INCOMPLETE_REFRESH_SHRINK_MAX. DISK_GAP matches Window disk refuse. */
@@ -27,6 +32,13 @@ public class Mail.HeaderListPolicy {
             && folder_kind == FolderKind.IMPORTANT;
     }
 
+    /* Camel already held roughly as many UIDs as Letter before this walk.
+     * Applies to every catastrophic shrink (not only LARGE folders): Conoscenza
+     * sat at ~200 Letter headers with Camel still on ~26. */
+    public static bool camel_summary_caught_up (uint previous_length, uint camel_uids_before) {
+        return camel_uids_before + SHRINK_SLOP >= previous_length;
+    }
+
     /* Called only when incoming + SHRINK_SLOP < previous.
      * Returns true → keep Letter’s prior list. */
     public static bool keep_prior_on_shrink (
@@ -37,23 +49,39 @@ public class Mail.HeaderListPolicy {
         bool refresh,
         bool refresh_completed,
         bool server_refresh_finished,
+        uint camel_uids_before,
         out string reason
     ) {
         if (refresh && !refresh_completed) {
             reason = "incomplete refresh";
             return true;
         }
+
+        var camel_ok = camel_summary_caught_up (previous_length, camel_uids_before);
+
         if (incoming_length == 0 && refresh && server_refresh_finished) {
+            if (!camel_ok) {
+                reason = "finished but Camel behind";
+                return true;
+            }
             reason = "complete empty";
             return false;
         }
         if (trust_gmail_important_refresh (account_kind, folder_kind, server_refresh_finished)) {
+            if (!camel_ok) {
+                reason = "finished but Camel behind";
+                return true;
+            }
             reason = "complete Important";
             return false;
         }
-        /* Finished server walk (until-done / Update Folder / complete tip of
-         * a small mailbox): trust the shorter list — other clients win. */
+        /* Finished server walk with Camel already caught up: trust the shorter
+         * list — other clients win. */
         if (refresh && server_refresh_finished) {
+            if (!camel_ok) {
+                reason = "finished but Camel behind";
+                return true;
+            }
             reason = "complete server list";
             return false;
         }

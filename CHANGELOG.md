@@ -19,24 +19,25 @@ refactors unless they affect behaviour.
 
 ## [Unreleased](https://github.com/stalvatero/letter/compare/v1.5.0...HEAD)
 
+
 ### Fixed
 
 - Mail from senders you have not trusted no longer loads anything from the
   network. Remote stylesheets, fonts, audio, video, frames and page redirects
   were still loaded and could tell the sender the message was opened.
   Replies and forwards to such mail no longer load its remote images.
-
-
-### Fixed
-
-- After a finished server refresh, Letter trusts the shorter folder list —
-  including large Archive and Inbox shrinks — so empties and deletes from
-  another PC, phone, or Empty Trash stay aligned. Incomplete tips, skipped
-  walks, and local-only summaries still keep the longer Letter index.
+  Thanks to [Illya Yalovyy](https://github.com/IllyaYalovyy).
+- After a finished server refresh, Letter trusts the shorter folder list when
+  Camel’s local UID summary was already roughly in line with Letter — so
+  empties and deletes from another PC, phone, or Empty Trash stay aligned.
+  Incomplete tips, skipped walks, and a “finished” walk that still only saw a
+  tiny Camel summary (common on a slow link after a budget tip) keep the
+  longer Letter index instead of wiping it.
 
 ### Changed
-- Refine mail search clear button styles for improved UI consistency. 
-  Increased dimensions and added hover/active states for better user interaction.
+
+- Search clear control is a bit larger and shows a hover background, closer to
+  the system search-entry affordance.
 
 
 ## [1.5.0](https://github.com/stalvatero/letter/compare/v1.0.0...v1.5.0) - 2026-10-08

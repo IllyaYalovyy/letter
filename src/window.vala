@@ -1423,19 +1423,19 @@ public class Mail.Window : Adw.ApplicationWindow {
                 ));
                 return;
             }
-            /* Finished server walk = source of truth (other clients win).
-             * Incomplete tips / failed walks must not shrink Archive etc. */
+            /* Finished + Camel caught up = source of truth (other clients win).
+             * A finished walk on a still-tiny Camel summary must not shrink. */
             var accept_authoritative =
                 refresh_timeout_seconds != MailSession.REFRESH_INFO_SKIP
                 && !this.mail_session.last_list_refresh_incomplete
                 && !this.mail_session.last_list_refresh_failed
-                && this.mail_session.last_list_refresh_completed;
+                && this.mail_session.last_list_refresh_authoritative;
             var accept_empty = accept_authoritative && messages.length == 0;
             var accept_important = messages.length > 0
                 && HeaderListPolicy.trust_gmail_important_refresh (
                     account.kind,
                     folder.kind,
-                    this.mail_session.last_list_refresh_completed
+                    this.mail_session.last_list_refresh_authoritative
                 );
             store_folder_messages (
                 account,
