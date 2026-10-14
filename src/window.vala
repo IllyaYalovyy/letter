@@ -100,6 +100,8 @@ public class Mail.Window : Adw.ApplicationWindow {
 
     private Settings settings;
     private AccountAvatars account_avatars = new AccountAvatars ();
+    private uint account_rail_generation;
+    private MessageDragPayload? active_message_drag;
     private Gtk.ListBox account_list;
     private Gtk.ListBox folder_list;
     private Gtk.ListView message_list;
@@ -474,6 +476,16 @@ public class Mail.Window : Adw.ApplicationWindow {
             return false;
         });
         this.message_list.add_controller (keys);
+        /* Own DropTarget that refuses our payload so Gtk.ListView never
+         * arms its insertion dndtarget (thin line above/below the row). */
+        var message_drop_reject = new Gtk.DropTarget (
+            typeof (MessageDragPayload),
+            Gdk.DragAction.MOVE
+        );
+        message_drop_reject.propagation_phase = Gtk.PropagationPhase.CAPTURE;
+        message_drop_reject.enter.connect (on_message_list_drop_enter);
+        message_drop_reject.motion.connect (on_message_list_drop_motion);
+        this.message_list.add_controller (message_drop_reject);
 
         this.account_scrolled = new Gtk.ScrolledWindow () {
             hscrollbar_policy = Gtk.PolicyType.NEVER,
@@ -2790,6 +2802,7 @@ public class Mail.Window : Adw.ApplicationWindow {
     private void fill_account_rail () {
         var guard = this.selecting_account;
         this.selecting_account = true;
+        this.account_rail_generation++;
 
         Gtk.Widget? child = this.account_rail_list.get_first_child ();
         while (child != null) {
@@ -2823,9 +2836,12 @@ public class Mail.Window : Adw.ApplicationWindow {
             else
                 group = button;
             button.set_data ("account", account);
-            button.child = Utils.account_brand_image (account, 28);
-            if (this.settings.get_boolean ("account-avatars"))
-                show_account_avatar.begin (button, account);
+            if (this.settings.get_boolean ("account-avatars")) {
+                button.child = new Adw.Avatar (28, account_avatar_label (account), true);
+                show_account_avatar.begin (button, account, this.account_rail_generation);
+            } else {
+                button.child = Utils.account_brand_image (account, 28);
+            }
             button.toggled.connect (() => {
                 if (!button.active || this.selecting_account)
                     return;
@@ -2853,13 +2869,31 @@ public class Mail.Window : Adw.ApplicationWindow {
         this.selecting_account = guard;
     }
 
-    private async void show_account_avatar (Gtk.ToggleButton button, Account account) {
+    private static string account_avatar_label (Account account) {
+        if (account.display_name != null && account.display_name.strip ().length > 0)
+            return account.display_name;
+        if (account.email != null && account.email.length > 0)
+            return account.email;
+        return "?";
+    }
+
+    private async void show_account_avatar (Gtk.ToggleButton button, Account account, uint generation) {
         var goa = (get_application () as Application)?.accounts.goa;
         if (goa == null)
             return;
         var picture = yield this.account_avatars.load (goa, account);
-        if (picture != null)
-            button.child = new Adw.Avatar (28, account.display_name, false) { custom_image = picture };
+        if (generation != this.account_rail_generation || picture == null)
+            return;
+        if (button.get_parent () == null)
+            return;
+        var avatar = button.child as Adw.Avatar;
+        if (avatar != null) {
+            avatar.custom_image = picture;
+        } else {
+            avatar = new Adw.Avatar (28, account_avatar_label (account), true);
+            avatar.custom_image = picture;
+            button.child = avatar;
+        }
     }
 
     private void sync_account_row_sizes () {
@@ -5738,6 +5772,17 @@ public class Mail.Window : Adw.ApplicationWindow {
         };
         click.pressed.connect (on_message_secondary_pressed);
         row.add_controller (click);
+
+        /* MOVE — valid folders show the move cursor; invalid ones (and the
+         * message list) show the forbidden cursor instead of copy “+”. */
+        var drag = new Gtk.DragSource () {
+            actions = Gdk.DragAction.MOVE,
+        };
+        drag.prepare.connect (on_message_drag_prepare);
+        drag.drag_begin.connect (on_message_drag_begin);
+        drag.drag_end.connect (on_message_drag_end);
+        drag.drag_cancel.connect (on_message_drag_cancel);
+        row.add_controller (drag);
         item.child = row;
     }
 
@@ -5768,12 +5813,193 @@ public class Mail.Window : Adw.ApplicationWindow {
         /* This call may recycle the row. The extra ref lasts until return. */
         row.ref ();
         var conversation = row.conversation;
-        var position = row.list_position;
+        var position = position_of_conversation (conversation);
+        if (position != Gtk.INVALID_LIST_POSITION)
+            row.list_position = position;
         click.set_state (Gtk.EventSequenceState.CLAIMED);
         if (position != Gtk.INVALID_LIST_POSITION && !this.message_selection.is_selected (position))
             this.message_selection.select_item (position, true);
         popup_message_menu (row, x, y, conversation, null);
         row.unref ();
+    }
+
+    private uint position_of_conversation (Conversation? conversation) {
+        if (conversation == null)
+            return Gtk.INVALID_LIST_POSITION;
+        var n = this.message_store.n_items;
+        for (uint i = 0; i < n; i++) {
+            var item = this.message_store.get_item (i) as Conversation;
+            if (item == null)
+                continue;
+            if (item == conversation || item.id == conversation.id)
+                return i;
+        }
+        return Gtk.INVALID_LIST_POSITION;
+    }
+
+    private Gdk.ContentProvider? on_message_drag_prepare (Gtk.DragSource drag, double x, double y) {
+        unowned MessageRow? row = drag.widget as MessageRow;
+        if (row == null)
+            return null;
+        if (this.selected_folder != null && this.selected_folder.is_local_outbox)
+            return null;
+
+        /* Never trust row.list_position after a splice — ListView can lag on
+         * rebind, and selecting by a stale index drags the wrong mail. */
+        var conversation = row.conversation;
+        var position = position_of_conversation (conversation);
+        if (position == Gtk.INVALID_LIST_POSITION)
+            return null;
+        row.list_position = position;
+        if (!this.message_selection.is_selected (position))
+            this.message_selection.select_item (position, true);
+
+        var messages = selected_listed_messages ();
+        var movable = new GenericArray<Message> ();
+        for (uint i = 0; i < messages.length; i++) {
+            if (is_outbox_message (messages[i]) || messages[i].is_placeholder)
+                continue;
+            movable.add (messages[i]);
+        }
+        if (movable.length == 0)
+            return null;
+
+        this.active_message_drag = new MessageDragPayload (movable);
+        return new Gdk.ContentProvider.for_value (this.active_message_drag);
+    }
+
+    private void on_message_drag_begin (Gtk.DragSource drag, Gdk.Drag gdk_drag) {
+        this.message_list.add_css_class ("message-list-dragging");
+        var count = this.active_message_drag != null ? this.active_message_drag.count : 1;
+        /* Frozen Cairo texture — a live DragIcon/widget re-composites every
+         * motion frame and fringes a 1px hairline on the card edge (Wayland).
+         * Bake @scale pixels, but report logical size so GTK does not show it at 200%. */
+        var scale = drag.widget != null ? drag.widget.get_scale_factor () : 1;
+        var icon = build_message_drag_paintable (count, scale);
+        drag.set_icon (icon, icon.get_intrinsic_width () / 2, icon.get_intrinsic_height () / 2);
+    }
+
+    private void on_message_drag_end (Gtk.DragSource drag, Gdk.Drag gdk_drag, bool delete_data) {
+        this.message_list.remove_css_class ("message-list-dragging");
+        this.active_message_drag = null;
+        clear_folder_drop_highlights ();
+    }
+
+    private bool on_message_drag_cancel (Gtk.DragSource drag, Gdk.Drag gdk_drag, Gdk.DragCancelReason reason) {
+        this.message_list.remove_css_class ("message-list-dragging");
+        this.active_message_drag = null;
+        clear_folder_drop_highlights ();
+        return false;
+    }
+
+    private Gdk.DragAction on_message_list_drop_enter (Gtk.DropTarget target, double x, double y) {
+        return 0;
+    }
+
+    private Gdk.DragAction on_message_list_drop_motion (Gtk.DropTarget target, double x, double y) {
+        return 0;
+    }
+
+    private static void drag_rounded_rect (Cairo.Context cr, double x, double y, double w, double h, double r) {
+        cr.new_sub_path ();
+        cr.arc (x + w - r, y + r, r, -Math.PI / 2, 0);
+        cr.arc (x + w - r, y + h - r, r, 0, Math.PI / 2);
+        cr.arc (x + r, y + h - r, r, Math.PI / 2, Math.PI);
+        cr.arc (x + r, y + r, r, Math.PI, 3 * Math.PI / 2);
+        cr.close_path ();
+    }
+
+    private static Gdk.Paintable build_message_drag_paintable (uint count, int scale) {
+        if (scale < 1)
+            scale = 1;
+        const int width = 128;
+        const int height = 56;
+        var surface = new Cairo.ImageSurface (Cairo.Format.ARGB32, width * scale, height * scale);
+        var cr = new Cairo.Context (surface);
+        cr.scale (scale, scale);
+
+        uint cards = uint.min (count < 1 ? 1 : count, 3);
+        for (uint i = 0; i < cards; i++) {
+            var depth = cards - 1 - i;
+            double x = 8 + depth * 5;
+            double y = 6 + depth * 4;
+            double w = 100;
+            double h = 40;
+            drag_rounded_rect (cr, x, y, w, h, 8);
+            if (depth == 0)
+                cr.set_source_rgb (0.98, 0.98, 0.98);
+            else
+                cr.set_source_rgb (0.93, 0.93, 0.93);
+            cr.fill_preserve ();
+            cr.set_source_rgba (0.55, 0.55, 0.55, 0.35);
+            cr.set_line_width (1.0);
+            cr.stroke ();
+
+            if (depth == 0) {
+                cr.set_source_rgb (0.55, 0.72, 0.92);
+                double ly = y + 10;
+                drag_rounded_rect (cr, x + 10, ly, w - 20, 5, 2.5);
+                cr.fill ();
+                ly += 9;
+                drag_rounded_rect (cr, x + 10, ly, w - 20, 5, 2.5);
+                cr.fill ();
+                ly += 9;
+                drag_rounded_rect (cr, x + 10, ly, 48, 5, 2.5);
+                cr.fill ();
+            }
+        }
+
+        if (count > 1) {
+            string label = count.to_string ();
+            cr.select_font_face ("Sans", Cairo.FontSlant.NORMAL, Cairo.FontWeight.BOLD);
+            cr.set_font_size (11);
+            Cairo.TextExtents extents;
+            cr.text_extents (label, out extents);
+            double bw = double.max (22, extents.width + 12);
+            double bh = 18;
+            double bx = width - bw - 4;
+            double by = 2;
+            drag_rounded_rect (cr, bx, by, bw, bh, bh / 2);
+            cr.set_source_rgb (0.26, 0.52, 0.96);
+            cr.fill ();
+            cr.set_source_rgb (1, 1, 1);
+            cr.move_to (bx + (bw - extents.width) / 2 - extents.x_bearing,
+                by + (bh - extents.height) / 2 - extents.y_bearing);
+            cr.show_text (label);
+        }
+
+        surface.flush ();
+        unowned uint8[] data = surface.get_data ();
+        var copy = new uint8[surface.get_stride () * surface.get_height ()];
+        Memory.copy (copy, data, copy.length);
+        var texture = new Gdk.MemoryTexture (
+            surface.get_width (),
+            surface.get_height (),
+            Gdk.MemoryFormat.B8G8R8A8_PREMULTIPLIED,
+            new Bytes.take (copy),
+            surface.get_stride ()
+        );
+        return new MessageDragPaintable (texture, width, height);
+    }
+
+    private void clear_folder_drop_highlights () {
+        for (int i = 0; this.folder_list.get_row_at_index (i) != null; i++) {
+            var row = this.folder_list.get_row_at_index (i) as FolderRow;
+            row?.remove_css_class ("folder-drop");
+        }
+    }
+
+    private bool folder_accepts_message_drop (Folder folder, MessageDragPayload? payload) {
+        if (folder.is_virtual_view || folder.is_gmail_namespace)
+            return false;
+        if (payload == null || payload.messages.length == 0)
+            return false;
+        for (uint i = 0; i < payload.messages.length; i++) {
+            var from = folder_for_message (payload.messages[i]);
+            if (from != null && from.full_name != folder.full_name)
+                return true;
+        }
+        return false;
     }
 
     private uint selected_count () {
@@ -8931,6 +9157,70 @@ public class Mail.Window : Adw.ApplicationWindow {
          * row alive after the folder list is rebuilt. */
         row.context_pressed.connect (popup_folder_menu);
         row.expander_toggled.connect (toggle_folder_collapsed);
+
+        var target = new Gtk.DropTarget (typeof (MessageDragPayload), Gdk.DragAction.MOVE);
+        target.preload = true;
+        target.accept.connect (on_folder_drop_accept);
+        target.enter.connect (on_folder_drop_enter);
+        target.leave.connect (on_folder_drop_leave);
+        target.drop.connect (on_folder_drop);
+        row.add_controller (target);
+    }
+
+    private MessageDragPayload? payload_from_drop_target (Gtk.DropTarget target) {
+        var value = target.get_value ();
+        if (value.holds (typeof (MessageDragPayload))) {
+            var payload = value.get_object () as MessageDragPayload;
+            if (payload != null)
+                return payload;
+        }
+        return this.active_message_drag;
+    }
+
+    private bool on_folder_drop_accept (Gtk.DropTarget target, Gdk.Drop drop) {
+        var row = target.widget as FolderRow;
+        if (row == null)
+            return false;
+        return folder_accepts_message_drop (row.folder, payload_from_drop_target (target));
+    }
+
+    private Gdk.DragAction on_folder_drop_enter (Gtk.DropTarget target, double x, double y) {
+        var row = target.widget as FolderRow;
+        if (row == null)
+            return 0;
+
+        var payload = payload_from_drop_target (target);
+        clear_folder_drop_highlights ();
+        if (!folder_accepts_message_drop (row.folder, payload)) {
+            target.reject ();
+            return 0;
+        }
+
+        row.add_css_class ("folder-drop");
+        return Gdk.DragAction.MOVE;
+    }
+
+    private void on_folder_drop_leave (Gtk.DropTarget target) {
+        var row = target.widget as FolderRow;
+        row?.remove_css_class ("folder-drop");
+    }
+
+    private bool on_folder_drop (Gtk.DropTarget target, Value value, double x, double y) {
+        var row = target.widget as FolderRow;
+        row?.remove_css_class ("folder-drop");
+        if (row == null)
+            return false;
+
+        var payload = value.get_object () as MessageDragPayload;
+        if (payload == null)
+            payload = this.active_message_drag;
+        if (!folder_accepts_message_drop (row.folder, payload))
+            return false;
+
+        /* Local optimistic move + deferred registry only — no server flush. */
+        transfer_messages (payload.messages, row.folder, false, false);
+        this.active_message_drag = null;
+        return true;
     }
 
     private bool on_folder_key_pressed (uint keyval) {

@@ -133,7 +133,7 @@ public class Mail.PreferencesDialog : Adw.PreferencesDialog {
 
         var avatars_row = new Adw.SwitchRow () {
             title = _("Account pictures"),
-            subtitle = _("Show Google profile pictures in the accounts rail."),
+            subtitle = _("Show profile pictures or initials in the accounts rail."),
             subtitle_lines = 2,
             active = this.settings.get_boolean ("account-avatars"),
         };

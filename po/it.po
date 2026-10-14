@@ -1936,6 +1936,12 @@ msgstr "Barra account"
 msgid "Customise the account sidebar."
 msgstr "Personalizza la barra laterale degli account."
 
+msgid "Account pictures"
+msgstr "Foto account"
+
+msgid "Show profile pictures or initials in the accounts rail."
+msgstr "Mostra foto profilo o iniziali nella barra account."
+
 msgid "Theme colour"
 msgstr "Colore tema"
 

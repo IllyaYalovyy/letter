@@ -21,8 +21,12 @@ refactors unless they affect behaviour.
 
 ### Added
 
-- Preferences → **Appearance** → **Account pictures** shows Google profile
-  pictures in the accounts rail. Off by default.
+- Preferences → **Appearance** → **Account pictures** shows profile pictures
+  (Google and Microsoft 365) or initials in the accounts rail. Off by default.
+  Thanks to [Illya Yalovyy](https://github.com/IllyaYalovyy).
+- Drag messages from the list onto a folder to move them. Multi-select and
+  conversations only move mail that belongs to the open folder; the drag icon
+  shows how many.
 
 
 ### Fixed

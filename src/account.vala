@@ -511,3 +511,46 @@ public class Mail.Message : Object {
         }
     }
 }
+
+/* Payload for dragging listed messages onto a folder row. */
+public class Mail.MessageDragPayload : Object {
+    public GenericArray<Message> messages { get; private set; }
+
+    public MessageDragPayload (GenericArray<Message> messages) {
+        this.messages = messages;
+    }
+
+    public uint count {
+        get { return this.messages.length; }
+    }
+}
+
+/* HiDPI drag icon: texture is device pixels, intrinsic size is logical. */
+public class Mail.MessageDragPaintable : Object, Gdk.Paintable {
+    private Gdk.Texture texture;
+    private int logical_width;
+    private int logical_height;
+
+    public MessageDragPaintable (Gdk.Texture texture, int logical_width, int logical_height) {
+        this.texture = texture;
+        this.logical_width = logical_width;
+        this.logical_height = logical_height;
+    }
+
+    public void snapshot (Gdk.Snapshot snapshot, double width, double height) {
+        var gtk = snapshot as Gtk.Snapshot;
+        if (gtk == null)
+            return;
+        var bounds = Graphene.Rect ();
+        bounds.init (0, 0, (float) width, (float) height);
+        gtk.append_texture (this.texture, bounds);
+    }
+
+    public int get_intrinsic_width () {
+        return this.logical_width;
+    }
+
+    public int get_intrinsic_height () {
+        return this.logical_height;
+    }
+}

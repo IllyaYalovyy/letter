@@ -44,6 +44,8 @@ ical_dep = dependency('libical-glib')
 goa_dep = dependency('goa-1.0', version: '>= 3.50')
 webkit_dep = dependency('webkitgtk-6.0', version: '>= 2.44')
 gsound_dep = dependency('gsound', version: '>= 1.0')
+soup_dep = dependency('libsoup-3.0', version: '>= 3.0')
+json_glib_dep = dependency('json-glib-1.0', version: '>= 1.6')
 
 # Camel 3.58 renamed get_uids→dup_uids, search_by_expression→search_sync,
 # and FolderSearch.util_hash_message_id→search_util_hash_message_id. Ubuntu
@@ -85,6 +87,8 @@ mail_deps = [
   goa_dep,
   webkit_dep,
   gsound_dep,
+  soup_dep,
+  json_glib_dep,
 ]
 
 prefix = get_option('prefix')

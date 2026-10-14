@@ -109,6 +109,8 @@ test_account_avatars = executable(
     gtk_dep,
     eds_dep,
     goa_dep,
+    soup_dep,
+    json_glib_dep,
   ],
   include_directories: config_h_dir,
 )

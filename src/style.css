@@ -12,9 +12,10 @@
   border-right: 1px solid var(--border-color);
 }
 
-/* Split reading-pane right: keep a gap before the main menu. */
+/* Split reading-pane right: keep a gap before the main menu.
+ * GTK CSS has no margin-end; physical margin-right matches the rest of this file. */
 .reader-header .mail-search-field {
-  margin-end: 8px;
+  margin-right: 8px;
 }
 
 .account-rail {
@@ -69,15 +70,6 @@
 .account-rail.rail-theme button:hover,
 .account-rail.rail-theme button:checked {
   background: color-mix(in srgb, var(--window-fg-color) 12%, transparent);
-}
-
-.account-rail button:checked avatar {
-  outline: 2px solid var(--accent-fg-color);
-  outline-offset: 1px;
-}
-
-.account-rail.rail-theme button:checked avatar {
-  outline-color: var(--window-fg-color);
 }
 
 .account-rail .account-offline {
@@ -165,6 +157,11 @@
   color: var(--accent-color);
 }
 
+.folder-list > row.folder-drop {
+  background: color-mix(in srgb, var(--accent-bg-color) 22%, transparent);
+  box-shadow: inset 0 0 0 2px var(--accent-color);
+}
+
 .message-list {
   background: var(--view-bg-color);
 }
@@ -247,6 +244,25 @@ headerbar button.conversation-toggle:checked {
   padding: 8px 12px 8px 8px;
   border-bottom: 1px solid var(--border-color);
   min-height: 72px;
+}
+
+/* Kill GTK's list insertion line while dragging mail onto folders. */
+.message-list dndtarget,
+.message-list > dndtarget,
+.message-list-dragging dndtarget {
+  opacity: 0;
+  border: none;
+  min-height: 0;
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.message-list > row:drop(active),
+.message-list-dragging > row:drop(active) {
+  box-shadow: none;
 }
 
 .message-row {

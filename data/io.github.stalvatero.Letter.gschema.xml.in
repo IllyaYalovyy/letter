@@ -59,7 +59,7 @@
     <key name="account-avatars" type="b">
       <default>false</default>
       <summary>Account pictures</summary>
-      <description>Show Google profile pictures in the accounts rail.</description>
+      <description>Show profile pictures or initials in the accounts rail.</description>
     </key>
     <key name="reader-zoom" type="d">
       <default>1.0</default>

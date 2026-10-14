@@ -1,6 +1,7 @@
-/* Google profile pictures for the accounts rail. */
+/* Profile pictures for the accounts rail (Google + Microsoft 365). */
 public class Mail.AccountAvatars : Object {
-    private const string USERINFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
+    private const string GOOGLE_USERINFO_URL = "https://www.googleapis.com/oauth2/v2/userinfo";
+    private const string MICROSOFT_PHOTO_URL = "https://graph.microsoft.com/v1.0/me/photos/48x48/$value";
     private const int PICTURE_SIZE = 64;
 
     private Soup.Session session = new Soup.Session ();
@@ -9,7 +10,7 @@ public class Mail.AccountAvatars : Object {
     /* The account's picture, or null when it has none or it cannot be fetched. */
     public async Gdk.Texture? load (Goa.Client goa, Account account) {
         var id = account.goa_id;
-        if (account.kind != AccountKind.GOOGLE || id == null)
+        if (id == null)
             return null;
         var cached = this.pictures.get (id);
         if (cached != null)
@@ -22,11 +23,19 @@ public class Mail.AccountAvatars : Object {
             string token;
             int expires_in;
             yield oauth.call_get_access_token (null, out token, out expires_in);
-            var url = picture_url (yield fetch (USERINFO_URL, token), PICTURE_SIZE);
-            if (url == null)
-                return null;
-            var picture = Gdk.Texture.from_bytes (yield fetch (url, null));
-            this.pictures.set (id, picture);
+            Gdk.Texture? picture = null;
+            switch (account.kind) {
+                case AccountKind.GOOGLE:
+                    picture = yield load_google (token);
+                    break;
+                case AccountKind.MICROSOFT:
+                    picture = yield load_microsoft (token);
+                    break;
+                default:
+                    break;
+            }
+            if (picture != null)
+                this.pictures.set (id, picture);
             return picture;
         } catch (Error e) {
             debug ("No account picture for %s: %s", id, e.message);
@@ -57,6 +66,23 @@ public class Mail.AccountAvatars : Object {
         if (options > link.last_index_of_char ('/'))
             link = link.substring (0, options);
         return "%s=s%d-c".printf (link, size);
+    }
+
+    private async Gdk.Texture? load_google (string token) throws Error {
+        var url = picture_url (yield fetch (GOOGLE_USERINFO_URL, token), PICTURE_SIZE);
+        if (url == null)
+            return null;
+        return Gdk.Texture.from_bytes (yield fetch (url, null));
+    }
+
+    private async Gdk.Texture? load_microsoft (string token) throws Error {
+        try {
+            return Gdk.Texture.from_bytes (yield fetch (MICROSOFT_PHOTO_URL, token));
+        } catch (Error e) {
+            /* 404 when the account has no photo — initials stay. */
+            debug ("No Microsoft photo: %s", e.message);
+            return null;
+        }
     }
 
     private async Bytes fetch (string url, string? token) throws Error {
