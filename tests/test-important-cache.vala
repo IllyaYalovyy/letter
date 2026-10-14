@@ -82,22 +82,22 @@ void main () {
         "local Important summary keeps the list"
     );
     expect (
-        Mail.HeaderListPolicy.keep_prior_on_shrink (
+        !Mail.HeaderListPolicy.keep_prior_on_shrink (
             Mail.AccountKind.MICROSOFT, important, 7773, 3, true, true, true, out reason
-        ) && reason == "large-folder refuse shrink",
-        "Microsoft Important keeps a large list"
+        ) && reason == "complete server list",
+        "finished Microsoft Important trusts the server list"
     );
     expect (
-        Mail.HeaderListPolicy.keep_prior_on_shrink (
+        !Mail.HeaderListPolicy.keep_prior_on_shrink (
             google, archive, 7773, 3, true, true, true, out reason
-        ) && reason == "large-folder refuse shrink",
-        "finished Archive keeps a large list"
+        ) && reason == "complete server list",
+        "finished Archive trusts a large server shrink"
     );
     expect (
-        Mail.HeaderListPolicy.keep_prior_on_shrink (
+        !Mail.HeaderListPolicy.keep_prior_on_shrink (
             google, inbox, 7773, 3, true, true, true, out reason
-        ) && reason == "large-folder refuse shrink",
-        "finished Inbox keeps a large list"
+        ) && reason == "complete server list",
+        "finished Inbox trusts a large server shrink"
     );
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
@@ -114,8 +114,14 @@ void main () {
     expect (
         !Mail.HeaderListPolicy.keep_prior_on_shrink (
             google, inbox, 200, 40, true, true, true, out reason
+        ) && reason == "complete server list",
+        "a finished small Inbox shrink trusts the server"
+    );
+    expect (
+        !Mail.HeaderListPolicy.keep_prior_on_shrink (
+            google, inbox, 200, 40, true, true, false, out reason
         ) && reason == "small-folder trust shrink",
-        "a small Inbox shrink is trusted"
+        "a small Inbox shrink without a server walk is still trusted"
     );
 
     expect (

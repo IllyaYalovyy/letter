@@ -20,6 +20,14 @@ refactors unless they affect behaviour.
 ## [Unreleased](https://github.com/stalvatero/letter/compare/v1.5.0...HEAD)
 
 
+### Fixed
+
+- After a finished server refresh, Letter trusts the shorter folder list —
+  including large Archive and Inbox shrinks — so empties and deletes from
+  another PC, phone, or Empty Trash stay aligned. Incomplete tips, skipped
+  walks, and local-only summaries still keep the longer Letter index.
+
+
 ## [1.5.0](https://github.com/stalvatero/letter/compare/v1.0.0...v1.5.0) - 2026-10-08
 
 

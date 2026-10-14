@@ -1,14 +1,17 @@
 /* When a header list may shrink.
  *
- * A large folder that "finished" with a tiny local summary must keep the
- * longer Letter list (Online Archive). Gmail Important is the exception:
- * it is a label, and a finished refresh is the set of messages that are
- * still important. Keeping the old rows leaves those messages marked
- * important in every other folder.
+ * Incomplete / skipped / local-only walks must not wipe a longer Letter
+ * index (Archive tip, budget cancel, REFRESH_INFO_SKIP).
  *
- * LARGE and SHRINK_SLOP are the same thresholds as MailSession
- * HEADER_LIST_LARGE and INCOMPLETE_REFRESH_SHRINK_MAX. DISK_GAP matches
- * the on-disk index refuse in Window.save_header_list_cache. */
+ * A *finished* server refresh is authoritative: Empty Trash, another PC,
+ * or a phone may have removed thousands of UIDs since Letter last checked.
+ * Server wins over the desktop cache (action after last successful sync).
+ *
+ * Gmail Important keeps an explicit reason string for logs/tests; the same
+ * finished-walk rule applies to every other folder.
+ *
+ * LARGE and SHRINK_SLOP match MailSession HEADER_LIST_LARGE /
+ * INCOMPLETE_REFRESH_SHRINK_MAX. DISK_GAP matches Window disk refuse. */
 public class Mail.HeaderListPolicy {
     public const uint LARGE = 500;
     public const uint SHRINK_SLOP = 100;
@@ -24,7 +27,8 @@ public class Mail.HeaderListPolicy {
             && folder_kind == FolderKind.IMPORTANT;
     }
 
-    /* Called only when incoming + SHRINK_SLOP < previous. */
+    /* Called only when incoming + SHRINK_SLOP < previous.
+     * Returns true → keep Letter’s prior list. */
     public static bool keep_prior_on_shrink (
         AccountKind account_kind,
         FolderKind folder_kind,
@@ -39,7 +43,7 @@ public class Mail.HeaderListPolicy {
             reason = "incomplete refresh";
             return true;
         }
-        if (incoming_length == 0 && refresh && refresh_completed) {
+        if (incoming_length == 0 && refresh && server_refresh_finished) {
             reason = "complete empty";
             return false;
         }
@@ -47,10 +51,19 @@ public class Mail.HeaderListPolicy {
             reason = "complete Important";
             return false;
         }
+        /* Finished server walk (until-done / Update Folder / complete tip of
+         * a small mailbox): trust the shorter list — other clients win. */
+        if (refresh && server_refresh_finished) {
+            reason = "complete server list";
+            return false;
+        }
         if (previous_length >= LARGE) {
-            reason = refresh
-                ? (refresh_completed ? "large-folder refuse shrink" : "incomplete refresh")
-                : "large-folder local refuse shrink";
+            if (!refresh) {
+                reason = "large-folder local refuse shrink";
+                return true;
+            }
+            /* refresh_completed but no server walk (SKIP / pending flags). */
+            reason = "large-folder refuse shrink";
             return true;
         }
         reason = "small-folder trust shrink";

@@ -945,10 +945,21 @@ public class Mail.Window : Adw.ApplicationWindow {
         /* Always drop locally-hidden (archived/moved pending flush) so Camel
          * summaries and disk header caches cannot resurrect them. */
         var visible = visible_messages (account, folder, messages);
-        /* Scale-based shrink guard. accept_server_shrink is a finished Gmail
-         * Important refresh: that shorter list is the label, so it replaces
-         * the cache. Every other large folder still keeps the prior list. */
-        if (previous != null
+        /* Scale-based shrink guard. accept_empty is a finished server walk
+         * that returned no UIDs (Empty Trash / emptied elsewhere) — must
+         * replace the list, not merge the old index back. accept_server_shrink
+         * is a finished authoritative refresh (other client / Important). */
+        if (accept_empty
+            && previous != null
+            && previous.length > 0
+            && visible.length == 0) {
+            Utils.sync_log (
+                "header cache accept empty “%s” (cleared %u)".printf (
+                    folder.name,
+                    previous.length
+                )
+            );
+        } else if (previous != null
             && HeaderListPolicy.ram_cache_refuses_shrink (
                 previous.length,
                 visible.length,
@@ -986,7 +997,14 @@ public class Mail.Window : Adw.ApplicationWindow {
         sort_messages_by_date (visible);
         this.message_cache.set (key, visible);
         touch_message_cache_key (key);
-        note_header_high_water (account, folder, visible.length);
+        /* Authoritative shrink must lower the watermark or the next tip will
+         * still think Letter owns the pre-delete high-water. */
+        if (accept_server_shrink || accept_empty) {
+            clear_header_high_water (account, folder);
+            note_header_high_water (account, folder, visible.length);
+        } else {
+            note_header_high_water (account, folder, visible.length);
+        }
         int total;
         int unread;
         message_counts (visible, out total, out unread);
@@ -1015,9 +1033,9 @@ public class Mail.Window : Adw.ApplicationWindow {
              * click before the 1.5s timer, would put the old index back. */
             persist_empty_header_list_now (account, folder);
         } else if (retired_drop || (persist_disk && accept_server_shrink)) {
-            /* Retired move ids, and a finished Gmail Important refresh, are
-             * real removals. Write them now so the next open cannot put the
-             * old rows back. */
+            /* Retired moves, finished Important, and authoritative server
+             * shrinks (other client / Empty Trash) write now so the next
+             * open cannot resurrect the longer index. */
             persist_trusted_header_list_now (account, folder, visible);
         } else if (persist_disk) {
             /* Never overwrite a larger on-disk header list with a Camel/Graph
@@ -1405,14 +1423,14 @@ public class Mail.Window : Adw.ApplicationWindow {
                 ));
                 return;
             }
-            /* A finished walk that returns no UIDs is the server folder.
-             * Persist that empty list; a later open must not resurrect the
-             * previous disk index, and the click must not cover it with the
-             * aligning spinner. */
-            var accept_empty = messages.length == 0
-                && refresh_timeout_seconds != MailSession.REFRESH_INFO_SKIP
+            /* Finished server walk = source of truth (other clients win).
+             * Incomplete tips / failed walks must not shrink Archive etc. */
+            var accept_authoritative =
+                refresh_timeout_seconds != MailSession.REFRESH_INFO_SKIP
                 && !this.mail_session.last_list_refresh_incomplete
-                && !this.mail_session.last_list_refresh_failed;
+                && !this.mail_session.last_list_refresh_failed
+                && this.mail_session.last_list_refresh_completed;
+            var accept_empty = accept_authoritative && messages.length == 0;
             var accept_important = messages.length > 0
                 && HeaderListPolicy.trust_gmail_important_refresh (
                     account.kind,
@@ -1426,7 +1444,7 @@ public class Mail.Window : Adw.ApplicationWindow {
                 known,
                 true,
                 accept_empty,
-                accept_important
+                accept_authoritative || accept_important
             );
             Utils.sync_log ("align “%s” ok %s → %u headers".printf (
                 folder.name,

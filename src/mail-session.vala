@@ -716,22 +716,16 @@ public class Mail.MailSession : Camel.Session {
          *
          * Catastrophic = incoming + INCOMPLETE_REFRESH_SHRINK_MAX < previous.
          *
-         * 1. Incomplete refresh (budget timed out) → always keep prior list
-         *    (any folder). Partial Graph/Camel summaries are untrusted.
-         * 2. Complete refresh + incoming empty → accept (folder cleared on
-         *    the server). Empty Trash/Junk from Letter already cleared the
-         *    list before this call; a finished walk that returns no UIDs
-         *    does the same for any other folder.
-         * 3. Finished Gmail Important refresh → accept a shorter list. The
-         *    folder is a label; the rows that left it must not stay marked
-         *    important elsewhere. The walk must have run to completion.
-         *    A skipped, timed-out, or failed refresh does not qualify.
-         * 4. Every other complete refresh + previous already large
-         *    (≥ HEADER_LIST_LARGE) + catastrophic shrink to a non-empty
-         *    partial → keep prior list. Online Archive and any big custom
-         *    folder can "complete" with a tiny local UID set. Kind and name
-         *    do not open this door for them.
-         * 5. Small folders + complete refresh → trust Camel (normal deletes).
+         * 1. Incomplete refresh (budget timed out) → keep prior list.
+         *    Partial Graph/Camel summaries are untrusted.
+         * 2. Finished server refresh (server_refresh_finished) → accept the
+         *    shorter list, including empty and large non-empty shrinks.
+         *    Another client / phone / Empty Trash may have removed thousands
+         *    of UIDs since Letter last synced; the server wins.
+         * 3. Gmail Important logs as “complete Important” (same accept).
+         * 4. Local-only / SKIP / pending-flags “refresh” on a large folder
+         *    → keep prior list (no server walk).
+         * 5. Small folders + complete refresh → trust (same as 2).
          *
          * Empty Trash/Junk *from Letter* clears RAM/disk/high-water first, so
          * previous is already empty before the next list_messages. */
@@ -774,7 +768,8 @@ public class Mail.MailSession : Camel.Session {
                     this.last_list_refresh_incomplete = true;
             } else if (reason == "complete empty"
                 || reason == "small-folder trust shrink"
-                || reason == "complete Important") {
+                || reason == "complete Important"
+                || reason == "complete server list") {
                 Utils.sync_log (
                     "headers “%s” %s (%u ← %u)".printf (
                         folder.name,
