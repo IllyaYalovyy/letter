@@ -33,6 +33,7 @@ mail_sources = files(
   'header-list-policy.vala',
   'account-row.vala',
   'account-store.vala',
+  'account-avatars.vala',
   'mail-session.vala',
   'body-index.vala',
   'notifier.vala',

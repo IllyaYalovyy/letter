@@ -71,6 +71,15 @@
   background: color-mix(in srgb, var(--window-fg-color) 12%, transparent);
 }
 
+.account-rail button:checked avatar {
+  outline: 2px solid var(--accent-fg-color);
+  outline-offset: 1px;
+}
+
+.account-rail.rail-theme button:checked avatar {
+  outline-color: var(--window-fg-color);
+}
+
 .account-rail .account-offline {
   opacity: 0.45;
 }

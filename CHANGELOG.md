@@ -19,6 +19,11 @@ refactors unless they affect behaviour.
 
 ## [Unreleased](https://github.com/stalvatero/letter/compare/v1.5.0...HEAD)
 
+### Added
+
+- Preferences → **Appearance** → **Account pictures** shows Google profile
+  pictures in the accounts rail. Off by default.
+
 
 ### Fixed
 

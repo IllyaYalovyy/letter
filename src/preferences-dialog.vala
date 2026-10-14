@@ -131,6 +131,17 @@ public class Mail.PreferencesDialog : Adw.PreferencesDialog {
         });
         appearance.add (rail_row);
 
+        var avatars_row = new Adw.SwitchRow () {
+            title = _("Account pictures"),
+            subtitle = _("Show Google profile pictures in the accounts rail."),
+            subtitle_lines = 2,
+            active = this.settings.get_boolean ("account-avatars"),
+        };
+        avatars_row.notify["active"].connect (() => {
+            this.settings.set_boolean ("account-avatars", avatars_row.active);
+        });
+        appearance.add (avatars_row);
+
         var reading = new Adw.PreferencesGroup () {
             title = _("Reading"),
         };
