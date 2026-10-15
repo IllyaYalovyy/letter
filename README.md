@@ -10,7 +10,7 @@ This is not a GNOME Core application, but it follows the clean GNOME 50 look and
 
 Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 
-**1.5.0** is the current release. Reading, composing, search, notifications, and cache-first sync are in place, with Appearance preferences for theme, reading mode, and the accounts rail. Install the Flatpak from [Releases](https://github.com/stalvatero/letter/releases). Account setup still happens only in GNOME Settings → Online Accounts. There is no in-app IMAP wizard and no mailbox that exists only inside Letter.
+**1.6.0** is the current release. Reading, composing, search, notifications, and cache-first sync are in place, with Appearance preferences for theme, reading mode, and the accounts rail. Install the Flatpak from [Releases](https://github.com/stalvatero/letter/releases). Account setup still happens only in GNOME Settings → Online Accounts. There is no in-app IMAP wizard and no mailbox that exists only inside Letter.
 
 ### Available languages
 
@@ -19,13 +19,11 @@ Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 - German (translation by [Christian Lauinger](https://github.com/ChrisLauinger77))
 - Greek (translation by [Ioannis Argyropoulos](https://github.com/Argy22))
 - Italian
+- Japanese (translated by [Kansa_Fu](https://github.com/Kansa-fu))
 - More will come — translations via pull request are very welcome.
 
 
-
 ## What the current version does:
-
-
 
 ### Accounts and desktop integration
 
@@ -33,7 +31,6 @@ Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 - No second account wizard and no local unnecessary “On this computer” mailbox
 - Account rail with provider icons and fast switch between the enabled email accounts
 - Per-account HTML multi-signatures, with a starred default for new messages
-
 
 
 ### Reading
@@ -49,7 +46,6 @@ Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 - Customizable mark as read on selection, after a delay, or never
 
 
-
 ### Sync and local cache
 
 - After the first full sync, Letter prefers the **local cache** for folder lists, headers, bookmarks, and unread badges so the UI stays responsive
@@ -60,12 +56,10 @@ Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 - Sending uses a virtual **Outbox** (retry / edit / cancel);
 
 
-
 ### Search
 
 - Search as you type in the current folder
 - Operator localized chips: `from:`, `to:` `cc:`, and **contains:** as the default when you press Enter
-
 
 
 ### Composing
@@ -80,7 +74,6 @@ Feel free to try it out and enjoy the app's potential. All feedback is welcome.
 - Save drafts
 
 
-
 ### Keyboard
 
 Keyboard shortcuts can be viewed by pressing F1 or via the Letter main menu.
@@ -92,7 +85,6 @@ Keyboard shortcuts can be viewed by pressing F1 or via the Letter main menu.
 - Light, dark, or follow the system colour and accent.
 - Sync interval and how many days of bodies to keep locally
 - Preferences page for recommended packages and how to install them
-
 
 
 ## What it needs
@@ -142,7 +134,6 @@ Add an account in **Settings → Online Accounts**, then open Letter.
 ```sh
 flatpak uninstall --user io.github.stalvatero.Letter
 ```
-
 
 
 ## Build from source
