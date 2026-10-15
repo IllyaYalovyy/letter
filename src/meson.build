@@ -39,6 +39,7 @@ mail_sources = files(
   'notifier.vala',
   'conversation.vala',
   'message-reader.vala',
+  'tls-image-fetcher.vala',
   'message-window.vala',
   'eml-viewer.vala',
   'attachment-chip.vala',

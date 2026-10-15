@@ -124,6 +124,24 @@ void test_policy_goes_first_without_doctype () {
     assert (Mail.Utils.insert_after_doctype ("", "<meta>") == "<meta>");
 }
 
+void test_inline_images_survive_republish () {
+    var content = new Mail.MessageContent () {
+        inline_token = Mail.InlineImagePages.reserve (),
+        inline_images = new GenericArray<Mail.InlineImage> (),
+    };
+    var first = new Mail.InlineImage () { data = new Bytes ("first".data), mime_type = "image/png" };
+    content.inline_images.add (first);
+    Mail.InlineImagePages.publish (content);
+    var uri = Mail.InlineImagePages.uri (content.inline_token, 0);
+    assert (Mail.InlineImagePages.lookup (uri) == first);
+    content.inline_images.add (new Mail.InlineImage () { data = new Bytes ("second".data), mime_type = "image/png" });
+    Mail.InlineImagePages.publish (content);
+    assert (Mail.InlineImagePages.lookup (uri) == first);
+    assert (Mail.InlineImagePages.lookup (Mail.InlineImagePages.uri (content.inline_token, 1)) != null);
+    content = null;
+    assert (Mail.InlineImagePages.lookup (uri) == null);
+}
+
 void main (string[] args) {
     Test.init (ref args);
     Test.add_func ("/content-policy/untrusted-blocks-every-remote-load", test_untrusted_policy_blocks_every_remote_load);
@@ -134,6 +152,7 @@ void main (string[] args) {
     Test.add_func ("/image-sources/without-images", test_image_sources_without_images);
     Test.add_func ("/image-sources/drop-query-and-fragment", test_image_sources_drop_query_and_fragment);
     Test.add_func ("/image-sources/cannot-inject-directives", test_image_sources_cannot_inject_directives);
+    Test.add_func ("/inline-images/republish", test_inline_images_survive_republish);
     Test.add_func ("/compose-policy/new-message-allows-remote", test_new_message_allows_remote);
     Test.add_func ("/compose-policy/reply-to-stranger-allows-only-own-signature-images", test_reply_to_stranger_allows_only_own_signature_images);
     Test.add_func ("/compose-policy/reply-to-trusted-sender-allows-remote", test_reply_to_trusted_sender_allows_remote);

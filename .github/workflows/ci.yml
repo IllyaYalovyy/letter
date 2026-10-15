@@ -30,6 +30,7 @@ jobs:
             gdk-pixbuf2-devel \
             gettext \
             gnome-online-accounts-devel \
+            gnutls-devel \
             gsound-devel \
             gtk4-devel \
             libadwaita-devel \

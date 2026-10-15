@@ -97,6 +97,11 @@
       <summary>Trusted senders</summary>
       <description>Email addresses allowed to load remote images. Microsoft 365 and Exchange also trust your mailbox, your organization domain, and contacts in the address book.</description>
     </key>
+    <key name="recover-remote-images" type="b">
+      <default>false</default>
+      <summary>Recover broken remote images</summary>
+      <description>Download missing issuer certificates to recover HTTPS images from trusted senders. This contacts additional servers and may omit connection-specific revocation checks.</description>
+    </key>
     <key name="sync-interval" type="i">
       <default>300</default>
       <summary>Sync interval</summary>
