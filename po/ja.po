@@ -1,0 +1,2667 @@
+#
+#  <>, YEAR-2026.
+# Kansa_fu <>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: letter 1.0.0-rc.4\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-25 16:50+0200\n"
+"PO-Revision-Date: 2026-10-15 18:24+0900\n"
+"Last-Translator: Kansa_fu <>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Gtranslator 50.0\n"
+
+#. Translators: the application name shown in the app grid, window title and tooltips
+#: data/io.github.stalvatero.Letter.desktop.in.in:3
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:4
+msgid "@app_name@"
+msgstr "@app_name@"
+
+#: data/io.github.stalvatero.Letter.desktop.in.in:4
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:5
+msgid "Read and send mail"
+msgstr "メールの閲覧と送信をします"
+
+#. Translators: Search terms to find this application. Do not translate or localize the semicolons. The list MUST also end with a semicolon.
+#: data/io.github.stalvatero.Letter.desktop.in.in:12
+msgid "email;mail;imap;google;outlook;exchange;"
+msgstr "email;mail;imap;google;outlook;exchange;"
+
+#: data/io.github.stalvatero.Letter.desktop.in.in:20 src/window.blp:242
+#: src/compose-dialog.vala:77
+msgid "New Message"
+msgstr "新しいメッセージ"
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:9
+msgid "Salvatore Oscurato"
+msgstr "Salvatore Oscurato"
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:12
+msgid ""
+"Letter is a GNOME mail client built on GTK 4 and libadwaita. It uses GNOME "
+"Online Accounts and Evolution Data Server, the same stack as Calendar and "
+"Contacts, so Google, Microsoft 365, Exchange, and IMAP accounts already "
+"configured on the desktop appear here without a second setup."
+msgstr ""
+"Letterは、GTK 4とlibadwaitaを使用して構築されたGNOMEのメールクライアントで"
+"す。GNOME Online AccountsおよびEvolution Data Serverを利用しており、これはカ"
+"レンダーや連絡先と同じスタックであるため、デスクトップ環境で既に設定済みの"
+"Google、Microsoft 365、ExchangeおよびIMAPアカウントは、追加の設定を行うことな"
+"くここに表示されます。"
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:19
+msgid ""
+"Read conversations, search, compose HTML mail, and get notifications. Add "
+"accounts in Settings → Online Accounts. Letter needs GNOME 50 or later."
+msgstr ""
+"会話の閲覧、検索、HTMLメールの作成、通知の受信が可能です。「設定」→「オンライ"
+"ンアカウント」からアカウントを追加してください。Letterを使用するには、GNOME "
+"50以降が必要です。"
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:61
+msgid ""
+"Fifth 1.0 release candidate. Brazilian Portuguese translation, Debian/"
+"Ubuntu .deb on Releases beside Flatpak, reliable list selection after "
+"emptying a conversation from the current folder, and compose no longer "
+"autosaves drafts every two minutes (avoids duplicate drafts on Microsoft "
+"365)."
+msgstr ""
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:72
+msgid ""
+"Fourth 1.0 release candidate. Recipient chips offer Write to and Copy Email; "
+"compose gains high priority, Paste and Match Style, and Space to commit "
+"addresses. Open and save .eml files, bulk actions in multi-select, quieter "
+"Archive/Sent sync, Draft tip refresh, and aggregate notification sound."
+msgstr ""
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:83
+msgid ""
+"Third 1.0 release candidate. Soft archive, trash, move, and flags stay local "
+"until the sync timer, F5, startup, or quit, with an on-disk mutation "
+"registry so pending work survives a crash. Microsoft 365 Archive moves are "
+"bulk and fast again (Camel freeze around transfer). Virtual Outbox for Send, "
+"Drafts autosave every two minutes, and Flatpak ships a minimal Evolution + "
+"evolution-ews stack for Graph mail in the sandbox."
+msgstr ""
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:96
+msgid ""
+"Second 1.0 release candidate. Completes the German UI translation, fixes "
+"Microsoft 365 bookmarks against Outlook Flag (not High Importance), shows a "
+"compact badge for high-priority mail, and accepts localized search "
+"operators. Also includes calendar invitation timezone and Accept/Decline "
+"latency fixes from after rc.1."
+msgstr ""
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:107
+msgid ""
+"First 1.0 release candidate. Daily-use mail with cache-first sync, undo for "
+"archive, move and trash, Inbox on every startup, and an experimental Flatpak "
+"bundle. Feedback and remaining translations welcome before 1.0.0."
+msgstr ""
+
+#: data/io.github.stalvatero.Letter.metainfo.xml.in.in:117
+msgid ""
+"First public beta: reading, composing, search, notifications, and GNOME "
+"Online Accounts."
+msgstr ""
+
+#: src/application.vala:52
+msgid "Compose a new message"
+msgstr "メッセージを新規作成"
+
+#: src/application.vala:279 src/application.vala:285
+msgid "Could not open this message file."
+msgstr "このメッセージファイルを開くことができませんでした。"
+
+#: src/application.vala:282
+msgid "OK"
+msgstr "OK"
+
+#: src/application.vala:425
+msgid "A GNOME mail client that shares accounts with Calendar and Contacts."
+msgstr "カレンダーや連絡先とアカウントを共有するGNOMEメールクライアントです。"
+
+#: src/application.vala:431
+msgid "translator-credits"
+msgstr "Kansa_fu"
+
+#: src/application.vala:444 src/preferences-dialog.vala:39
+msgid "General"
+msgstr "一般"
+
+#: src/application.vala:445
+msgid "Quit"
+msgstr "終了"
+
+#: src/application.vala:446 src/preferences-dialog.vala:29
+msgid "Preferences"
+msgstr "環境設定"
+
+#: src/application.vala:447
+msgid "Keyboard shortcuts"
+msgstr "キーボードショートカット"
+
+#: src/application.vala:450
+msgid "Letter shortcuts"
+msgstr "Letterのショートカット"
+
+#: src/application.vala:451 src/window.blp:287 src/search-field.vala:17
+msgid "Search"
+msgstr "検索"
+
+#: src/application.vala:452
+msgid "New message"
+msgstr "新しいメッセージ"
+
+#: src/application.vala:453 src/window.vala:10027 src/message-reader.vala:1212
+#: src/message-reader.vala:1278
+msgid "Reply"
+msgstr "返信"
+
+#: src/application.vala:454 src/window.vala:10029 src/message-reader.vala:1213
+msgid "Reply All"
+msgstr "全員に返信"
+
+#: src/application.vala:455 src/window.vala:10030 src/message-reader.vala:1214
+msgid "Forward"
+msgstr "転送"
+
+#: src/application.vala:456 src/application.vala:525 src/window.vala:353
+#: src/window.vala:6522 src/window.vala:10038 src/window.vala:10104
+#: src/notifier.vala:104 src/message-reader.vala:1222
+msgid "Archive"
+msgstr "アーカイブ"
+
+#: src/application.vala:457
+msgid "Mark as unread"
+msgstr "未読としてマーク"
+
+#: src/application.vala:458 src/window.vala:10054 src/message-reader.vala:1235
+#: src/message-reader.vala:1306
+msgid "Bookmark"
+msgstr "ブックマーク"
+
+#: src/application.vala:459 src/application.vala:530 src/window.vala:355
+#: src/window.vala:6542 src/window.vala:8123 src/window.vala:10066
+#: src/window.vala:10116 src/notifier.vala:105 src/message-reader.vala:1224
+#: src/compose-dialog.vala:2417 src/signature-editor.vala:218
+#: src/signature-editor.vala:264 src/message-window.vala:395
+msgid "Delete"
+msgstr "削除"
+
+#: src/application.vala:460 src/window.vala:8313
+msgid "Undo"
+msgstr "元に戻す"
+
+#: src/application.vala:461 src/window.vala:10058 src/message-reader.vala:1245
+#: src/compose-dialog.vala:114 src/eml-viewer.vala:39
+msgid "Print"
+msgstr "印刷"
+
+#: src/application.vala:462
+msgid "Zoom In"
+msgstr "ズームイン"
+
+#: src/application.vala:463
+msgid "Zoom Out"
+msgstr "ズームアウト"
+
+#: src/application.vala:464
+msgid "Reset Zoom"
+msgstr "ズームを元に戻す"
+
+#: src/application.vala:465
+msgid "Refresh"
+msgstr "更新"
+
+#: src/application.vala:466
+msgid "Fullscreen"
+msgstr "全画面"
+
+#: src/application.vala:467
+msgid "Toggle sidebar"
+msgstr "サイドバーの切り替え"
+
+#: src/window.vala:340
+msgid "Messages in this conversation"
+msgstr "この会話でのメッセージ"
+
+#: src/window.vala:354 src/window.vala:6527 src/window.vala:8930
+#: src/window.vala:10036 src/window.vala:10102 src/message-reader.vala:1223
+msgid "Move"
+msgstr "移動"
+
+#: src/window.vala:486 src/window.vala:3336 src/window.vala:3673
+msgid "Search Results"
+msgstr "検索結果"
+
+#: src/window.vala:492
+msgid "Close Search"
+msgstr "検索を閉じる"
+
+#: src/window.vala:517 src/window.vala:3916
+msgid "Showing conversations"
+msgstr "会話の表示"
+
+#: src/window.vala:518 src/window.vala:3917 src/window.blp:278
+msgid "Group by conversation"
+msgstr "会話ごとにグループ分け"
+
+#: src/window.vala:526
+msgid "Press Enter to search."
+msgstr "Enterキーを押して検索"
+
+#: src/window.vala:1696
+#, c-format
+msgid "Sent “%s”"
+msgstr "「%s」を送信しました"
+
+#: src/window.vala:1703
+#, c-format
+msgid "Could not send “%s”: %s"
+msgstr "「%s」を送信できませんでした：%s"
+
+#: src/window.vala:1707 src/window.vala:5087 src/window.vala:6705
+msgid "Outbox"
+msgstr "送信トレイ"
+
+#: src/window.vala:1785 src/window.vala:5166 src/window.vala:10000
+msgid "Sending…"
+msgstr "送信中…"
+
+#: src/window.vala:2800
+msgid "Checking folders…"
+msgstr "フォルダの確認中…"
+
+#: src/window.vala:2863
+#, c-format
+msgid "Updating “%s” from server…"
+msgstr "サーバーから「%s」を更新中…"
+
+#: src/window.vala:2864 src/window.vala:2997
+#, c-format
+msgid "Updating “%s”…"
+msgstr "「%s」を更新中…"
+
+#: src/window.vala:3021
+#, c-format
+msgid "Downloading messages in “%s”…"
+msgstr "「%s」内のメッセージをダウンロード中…"
+
+#: src/window.vala:3371
+msgid "Searching…"
+msgstr "検索中..."
+
+#: src/window.vala
+msgid "Match any word"
+msgstr "任意の単語に一致"
+
+#: src/window.vala
+msgid "Search earlier messages"
+msgstr "過去のメッセージを検索"
+
+#: src/window.vala
+msgid ""
+"Can’t find what you’re looking for? Search more items by clicking the button "
+"below. It may take a few more seconds."
+msgstr ""
+"目的のアイテムが見つかりませんか？下のボタンをクリックして、さらにアイテムを"
+"検索してください。表示されるまで数秒ほどかかる場合があります。"
+
+#: src/window.vala
+msgid ""
+"No message contains every word. Try “Match any word”, or search earlier "
+"messages already downloaded on this device."
+msgstr ""
+"すべての単語が含まれているメッセージはありません。「任意の単語に一致」を試す"
+"か、このデバイスにすでにダウンロードされている過去のメッセージを検索してみて"
+"ください。"
+
+#: src/window.vala
+msgid ""
+"No cached messages match. Search earlier messages already on this device, or "
+"download more of the mailbox in Preferences."
+msgstr ""
+"一致するキャッシュされたメッセージはありません。このデバイスにすでに保存され"
+"ている過去のメッセージを検索するか、「設定」でメールボックスのデータをさらに"
+"ダウンロードしてください。"
+
+#: src/window.vala
+msgid "Indexing more local messages…"
+msgstr "さらに多くのローカルメッセージのインデックスを作成しています…"
+
+#: src/window.vala
+msgid ""
+"No more downloaded bodies to index. Widen the download window in "
+"Preferences, or open older folders."
+msgstr ""
+"これ以上インデックス作成できるダウンロード済みファイルがありません。「環境設"
+"定」でダウンロードする期間を延長するか、古いフォルダを開いてください。"
+
+#: src/window.vala
+msgid "Searching message bodies…"
+msgstr "メッセージ本文を検索中…"
+
+#: src/window.vala:3675 src/window.vala:6887
+#, c-format
+msgid "%d match"
+msgid_plural "%d matches"
+msgstr[0] "%d件の結果"
+
+#: src/window.vala:3681
+msgid ""
+"Results include subject, from, to, and preview from Letter’s index, plus "
+"bodies already downloaded to this device."
+msgstr ""
+"検索結果には、件名、送信元、宛先、および「Letter」のインデックスからのプレ"
+"ビューに加え、このデバイスにすでにダウンロードされている本文が含まれます。"
+
+#: src/window.vala:3688
+msgid "No Matches"
+msgstr "一致する結果はありません"
+
+#: src/window.vala:3689
+msgid ""
+"No cached messages match. Download more of the mailbox (or widen the body "
+"window in Preferences) and try again."
+msgstr ""
+"キャッシュに一致するメッセージはありません。他のメールをダウンロードするか"
+"（または「環境設定」で本文表示領域を拡大して）、もう一度お試しください。"
+
+#: src/window.vala:3898
+msgid "Showing unread messages"
+msgstr "未読メッセージを表示中"
+
+#: src/window.vala:3899 src/window.blp:268
+msgid "Show unread only"
+msgstr "未読のみを表示"
+
+#: src/window.vala:4014 src/window.vala:4168 src/window.vala:4183
+#: src/window.vala:4186 src/window.vala:4278 src/window.vala:4281
+#: src/window.vala:4508
+msgid "Offline"
+msgstr "オフライン"
+
+#: src/window.vala:4144
+msgid "Hide account list"
+msgstr "アカウント一覧を非表示"
+
+#: src/window.vala:4145
+msgid "Show account list"
+msgstr "アカウント一覧を表示"
+
+#: src/window.vala:4169
+msgid "Offline — enable the service in Online Accounts settings"
+msgstr "オフライン — オンラインアカウント設定でサービスを有効にしてください"
+
+#: src/window.vala:4184 src/window.vala:4279
+msgid "Enable the mail service in Online Accounts settings"
+msgstr "オンラインアカウント設定でメールサービスを有効にしてください"
+
+#: src/window.vala:4192
+msgid "Evolution Data Server Unavailable"
+msgstr "Evolution Data Server が利用できません"
+
+#: src/window.vala:4193
+msgid "Letter needs the same data server used by Calendar and Contacts."
+msgstr ""
+"Letterでは、「カレンダー」や「連絡先」で使用されているのと同様のデータサー"
+"バーが必要です。"
+
+#: src/window.vala:4205 src/window.vala:4247 src/window.vala:4338
+msgid "Loading Folders"
+msgstr "フォルダを読込中"
+
+#: src/window.vala:4209 src/window.vala:4253 src/window.blp:329
+msgid "Select a Folder"
+msgstr "フォルダを選択"
+
+#: src/window.vala:4210 src/window.vala:4254 src/window.blp:330
+msgid "Messages from the selected folder will appear here."
+msgstr "選択したフォルダ内のメッセージがここに表示されます。"
+
+#: src/window.vala:4217
+#, c-format
+msgid "Preparing mail for “%s”…"
+msgstr "「%s」宛てのメールを作成中…"
+
+#: src/window.vala:4225
+msgid "Mail Account Not Ready"
+msgstr "メールアカウントの準備ができていません"
+
+#: src/window.vala:4226
+msgid ""
+"Evolution Data Server has not published this account yet. Try again in a "
+"moment."
+msgstr ""
+"Evolution Data Serverは、このアカウントをまだ公開していません。しばらくしてか"
+"らもう一度お試しください。"
+
+#: src/window.vala:4249
+#, c-format
+msgid "Connecting to “%s”…"
+msgstr "「%s」に接続中…"
+
+#: src/window.vala:4264
+msgid "No Folders"
+msgstr "フォルダなし"
+
+#: src/window.vala:4265
+msgid "The account did not publish any subscribed folders."
+msgstr "このアカウントは、購読しているフォルダを1つも公開していません。"
+
+#: src/window.vala:4285
+msgid "Could Not Load Folders"
+msgstr "フォルダを読み込めませんでした"
+
+#: src/window.vala:4340
+#, c-format
+msgid "Waiting for folders from “%s”…"
+msgstr "「%s」からのフォルダを待機中…"
+
+#: src/window.vala:4521
+msgid "Loading local cache…"
+msgstr "ローカルキャッシュの読込中…"
+
+#: src/window.vala:4735
+msgid "Gmail Labels"
+msgstr "Gmailのラベル"
+
+#: src/window.vala:4736
+msgid ""
+"“[Gmail]” groups labels such as Important and Starred. Open one of those "
+"folders to read mail."
+msgstr ""
+"「[Gmail]」には、「重要」や「スター付き」などのラベルがまとめられています。い"
+"ずれかのフォルダを開くと、メールを読むことができます。"
+
+#: src/window.vala:4790
+msgid "Loading Messages"
+msgstr "メッセージを読込中"
+
+#: src/window.vala:4791
+#, c-format
+msgid "Reading the local list for “%s”…"
+msgstr "「%s」のローカルリストを読込中…"
+
+#: src/window.vala:4923
+msgid ""
+"Bookmark a message to collect it here. Bookmarks sync with the flag used by "
+"Outlook, Gmail, and IMAP."
+msgstr ""
+"メッセージをブックマークして、ここにまとめておくことができます。ブックマーク"
+"は、Outlook、Gmail、IMAPで使用されているフラグと同期されます。"
+
+#: src/window.vala:4928
+msgid ""
+"This system’s Microsoft 365 mail provider is older than evolution-ews 3.58, "
+"so Outlook Flags are not imported into Letter. Use the Flatpak build "
+"(bundles 3.58+) or upgrade evolution-ews. Bookmarks you set here still work "
+"locally."
+msgstr ""
+"このシステムの Microsoft 365 メールプロバイダーは evolution-ews 3.58 より古い"
+"バージョンであるため、Outlook のフラグは Letter にインポートされません。"
+"Flatpak ビルド（バンドル版 3.58 以降）を使用するか、evolution-ews をアップグ"
+"レードしてください。ここで設定したブックマークは、ローカル上でのみ引き続き機"
+"能します。"
+
+#: src/window.vala:4931
+msgid "No Bookmarks"
+msgstr "ブックマークなし"
+
+#: src/window.vala:4954
+msgid "No Unread Bookmarks"
+msgstr "未読のブックマークなし"
+
+#: src/window.vala:4955 src/window.vala:6101 src/window.vala:6116
+#: src/window.vala:8577
+msgid "Turn off the unread filter to see the rest of this folder."
+msgstr ""
+"このフォルダ内の残りのアイテムを表示するには、未読フィルターをオフにしてくだ"
+"さい。"
+
+#: src/window.vala:4997
+msgid "Bookmarks"
+msgstr "ブックマーク"
+
+#: src/window.vala:5167
+msgid "Waiting to send"
+msgstr "送信待ち"
+
+#: src/window.vala:5192
+msgid "Outbox Empty"
+msgstr "送信トレイは空です"
+
+#: src/window.vala:5193
+msgid "Messages you send are kept here until delivery succeeds."
+msgstr "送信したメッセージは、送信できるまでここに保存されます。"
+
+#: src/window.vala:5942
+#, c-format
+msgid "%u more new message"
+msgid_plural "%u more new messages"
+msgstr[0] "新しいメッセージがさらに%u件あります"
+
+#: src/window.vala:5970 src/window.vala:6665 src/window.vala:7383
+#: src/conversation.vala:162 src/conversation.vala:429
+#: src/conversation.vala:467 src/mail-session.vala:1706
+#: src/mail-session.vala:1776 src/mail-session.vala:5947
+#: src/mail-session.vala:5993 src/mail-session.vala:6747
+#: src/message-reader.vala:553 src/utils.vala:372 src/utils.vala:2291
+#: src/utils.vala:2298 src/outbox-store.vala:27 src/message-window.vala:281
+#: src/message-window.vala:297
+msgid "(No subject)"
+msgstr "（件名なし）"
+
+#: src/window.vala:6054
+msgid "Grouping Conversations"
+msgstr "会話のグループ化"
+
+#: src/window.vala:6055
+#, c-format
+msgid "Building threads for “%s”…"
+msgstr "「%s」のスレッドを作成中…"
+
+#: src/window.vala:6095 src/window.vala:8581 src/window.vala:9928
+msgid "No Messages"
+msgstr "メッセージなし"
+
+#: src/window.vala:6096 src/window.vala:8582 src/window.vala:9929
+msgid "This folder is empty."
+msgstr "このフォルダは空です。"
+
+#: src/window.vala:6100 src/window.vala:6115 src/window.vala:8576
+msgid "No Unread Messages"
+msgstr "未読メッセージなし"
+
+#: src/window.vala:6497
+#, c-format
+msgid "%u conversation selected"
+msgid_plural "%u conversations selected"
+msgstr[0] "%u件の会話が選択されました"
+
+#: src/window.vala:6532 src/window.vala:10050 src/window.vala:10109
+#: src/message-reader.vala:1228 src/message-reader.vala:1293
+msgid "Mark as Read"
+msgstr "既読としてマーク"
+
+#: src/window.vala:6537 src/window.vala:10052 src/window.vala:10111
+#: src/message-reader.vala:1289
+msgid "Mark as Unread"
+msgstr "未読としてマーク"
+
+#: src/window.vala:6768
+msgid "Update in progress…"
+msgstr "更新中..."
+
+#: src/window.vala:6769
+msgid "Aligning mail cache…"
+msgstr "メールキャッシュを同期中…"
+
+#: src/window.vala:6799
+msgid "Loading message…"
+msgstr "メッセージを読み込み中…"
+
+#: src/window.vala:6874
+#, c-format
+msgid "%d unread"
+msgid_plural "%d unread"
+msgstr[0] "未読%d件"
+
+#: src/window.vala:6875
+#, c-format
+msgid "%d message"
+msgid_plural "%d messages"
+msgstr[0] "%d件のメッセージ"
+
+#: src/window.vala:6917
+msgid "Aligning local cache"
+msgstr "ローカルキャッシュの同期中..."
+
+#: src/window.vala:6918
+#, c-format
+msgid ""
+"Loading “%s” to match the server. This can take a while on large mailboxes — "
+"please wait until the sync finishes."
+msgstr ""
+"サーバーと同期するために「%s」を読み込んでいます。メールボックスの容量が大き"
+"い場合は、この処理に時間がかかることがあります。同期が完了するまでお待ちくだ"
+"さい。"
+
+#: src/window.vala:6950 src/window.blp:344
+msgid "Select a Message"
+msgstr "メッセージを選択してください"
+
+#: src/window.vala:6951 src/window.blp:345
+msgid "Choose a message from the list to read it."
+msgstr "リストから読むメッセージを選んでください"
+
+#: src/window.vala:7277 src/window.vala:7300
+msgid "Evolution Data Server is unavailable."
+msgstr "Evolution Data Serverは利用できません。"
+
+#: src/window.vala:7288 src/window.vala:7311
+msgid "No account is configured to send mail."
+msgstr "メールを送信するように設定されているアカウントがありません。"
+
+#: src/window.vala:7569 src/message-window.vala:209
+msgid "No Important folder was found for this account."
+msgstr "このアカウントには「重要」フォルダが見つかりませんでした。"
+
+#: src/window.vala:7811
+msgid "No Junk folder was found for this account."
+msgstr "このアカウントには「迷惑メール」フォルダが見つかりませんでした。"
+
+#: src/window.vala:7822
+msgid "No Inbox folder was found for this account."
+msgstr "このアカウントには「受信トレイ」フォルダが見つかりませんでした。"
+
+#: src/window.vala:7847
+msgid "Could not save this message."
+msgstr "このメッセージを保存できませんでした。"
+
+#: src/window.vala:7864
+msgid "Message saved."
+msgstr "メッセージが保存されました。"
+
+#: src/window.vala:7938 src/window.vala:8020 src/message-window.vala:371
+msgid "No Archive folder was found for this account."
+msgstr "このアカウントには「アーカイブ」フォルダが見つかりませんでした。"
+
+#: src/window.vala:7958
+msgid "Removed from Outbox"
+msgstr "「送信トレイ」から削除しました"
+
+#: src/window.vala:8115 src/message-window.vala:391
+msgid "Delete permanently?"
+msgstr "完全に削除しますか？"
+
+#: src/window.vala:8116 src/message-window.vala:392
+msgid "This message will be permanently deleted. This cannot be undone."
+msgstr "このメッセージは完全に削除されます。この操作は元に戻せません。"
+
+#: src/window.vala:8118
+#, c-format
+msgid "Delete %u messages permanently?"
+msgstr "%u件のメッセージを完全に削除しますか？"
+
+#: src/window.vala:8119
+msgid "These messages will be permanently deleted. This cannot be undone."
+msgstr "これらのメッセージは完全に削除されます。この操作は元に戻せません。"
+
+#: src/window.vala:8122 src/window.vala:8929 src/window.vala:9463
+#: src/window.vala:9871 src/window.vala:9892 src/window.vala:10205
+#: src/window.vala:10243 src/window.vala:10431 src/window.vala:10487
+#: src/compose-dialog.vala:1614 src/preferences-dialog.vala:496
+#: src/signature-editor.vala:263 src/message-window.vala:394
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: src/window.vala:8409
+msgid "Message moved to Trash"
+msgid_plural "Messages moved to Trash"
+msgstr[0] "メッセージがゴミ箱に移動されました"
+
+#: src/window.vala:8416
+msgid "Message marked as Junk"
+msgid_plural "Messages marked as Junk"
+msgstr[0] "メッセージが「迷惑メール」としてマークされました"
+
+#: src/window.vala:8425
+msgid "Message archived"
+msgid_plural "Messages archived"
+msgstr[0] "メッセージがアーカイブされました"
+
+#: src/window.vala:8431
+#, c-format
+msgid "Message moved to “%s”"
+msgid_plural "Messages moved to “%s”"
+msgstr[0] "メッセージを「%s」に移動しました"
+
+#: src/window.vala:8923
+msgid "Choose where to move the selected messages."
+msgstr "選択したメッセージを移動する先を選択してください。"
+
+#: src/window.vala:8924
+msgid "Choose where to move this message."
+msgstr "このメッセージの移動先を選択してください。"
+
+#: src/window.vala:8925
+msgid "Move to Folder"
+msgstr "フォルダに移動"
+
+#: src/window.vala:8993 src/mail-session.vala:5711 src/mail-session.vala:5739
+#: src/mail-session.vala:5844 src/compose-dialog.vala:661
+#: src/message-window.vala:344
+msgid "This account has no sending identity."
+msgstr "このアカウントには送信者情報がありません。"
+
+#: src/window.vala:9408
+msgid "New Subfolder…"
+msgstr "新しいサブフォルダ…"
+
+#: src/window.vala:9410
+msgid "Rename…"
+msgstr "名前を変更…"
+
+#: src/window.vala:9416 src/account-row.vala:117
+msgid "Expand"
+msgstr "展開"
+
+#: src/window.vala:9416 src/account-row.vala:117
+msgid "Collapse"
+msgstr "折りたたむ"
+
+#: src/window.vala:9423
+msgid "Mark All as Read"
+msgstr "すべてを既読としてマーク"
+
+#: src/window.vala:9424
+msgid "Mark All as Unread"
+msgstr "すべてを未読としてマーク"
+
+#: src/window.vala:9426 src/window.vala:9464
+msgid "Update Folder"
+msgstr "フォルダを更新"
+
+#: src/window.vala:9431 src/window.vala:9893
+msgid "Empty"
+msgstr "空"
+
+#: src/window.vala:9433
+msgid "Restore"
+msgstr "復元"
+
+#: src/window.vala:9434 src/window.vala:10488
+msgid "Delete Permanently"
+msgstr "完全に削除"
+
+#: src/window.vala:9436 src/window.vala:10432
+msgid "Move to Trash"
+msgstr "ゴミ箱へ移動"
+
+#: src/window.vala:9455
+msgid "A folder update is already in progress."
+msgstr "フォルダの更新はすでに進行中です。"
+
+#: src/window.vala:9460
+#, c-format
+msgid "Update “%s” from server?"
+msgstr "サーバーから「%s」を更新しますか？"
+
+#: src/window.vala:8566
+msgid ""
+"Letter asks the server for this folder’s headers and merges them into its "
+"local index. Sending waits until that download finishes."
+msgstr ""
+"Letterはサーバーにこのフォルダのヘッダーを要求し、それらをローカルのインデッ"
+"クスに統合します。このダウンロードが完了するまで送信が待機されます。"
+
+#: src/window.vala:9840 src/window.vala:9872
+msgid "Remove All Bookmarks"
+msgstr "すべてのブックマークを削除"
+
+#: src/window.vala:9851
+msgid "Retrying Outbox…"
+msgstr "送信トレイの再送信中…"
+
+#: src/window.vala:9857
+msgid "Send All Now"
+msgstr "今すぐすべて送信"
+
+#: src/window.vala:9868
+msgid "Remove all bookmarks?"
+msgstr "すべてのブックマークを削除しますか？"
+
+#: src/window.vala:9869
+msgid ""
+"Every bookmarked message in this account will lose its bookmark. The "
+"messages themselves will not be deleted."
+msgstr ""
+"このアカウントでブックマークされているすべてのメッセージのブックマークが解除"
+"されます。メッセージ自体は削除されません。"
+
+#: src/window.vala:9889
+#, c-format
+msgid "Empty “%s”?"
+msgstr "「%s」を空にしますか？"
+
+#: src/window.vala:9890
+msgid ""
+"All messages in this folder will be permanently deleted. This cannot be "
+"undone."
+msgstr ""
+"このフォルダ内のすべてのメッセージは完全に削除されます。この操作は元に戻せま"
+"せん。"
+
+#: src/window.vala:10020 src/preferences-dialog.vala:428
+#: src/signature-editor.vala:212
+msgid "Edit"
+msgstr "編集"
+
+#: src/window.vala:10021
+msgid "Send Now"
+msgstr "今すぐ送信"
+
+#: src/window.vala:10023 src/message-reader.vala:1266
+#: src/compose-dialog.vala:77
+msgid "Edit Draft"
+msgstr "下書きを編集"
+
+#: src/window.vala:10025 src/message-reader.vala:1272
+msgid "Send Again"
+msgstr "もう一度送信"
+
+#: src/window.vala:10040
+msgid "Not Spam"
+msgstr "スパムではない"
+
+#: src/window.vala:10042
+msgid "Mark as Spam"
+msgstr "スパムとしてマーク"
+
+#: src/window.vala:10054 src/message-reader.vala:1305
+msgid "Remove Bookmark"
+msgstr "ブックマークを削除"
+
+#: src/window.vala:10057 src/message-reader.vala:1319
+msgid "Not Important"
+msgstr "重要ではない"
+
+#: src/window.vala:10057 src/message-reader.vala:1239
+#: src/message-reader.vala:1320
+msgid "Mark as Important"
+msgstr "重要としてマーク"
+
+#: src/window.vala:10060
+msgid "Save as EML…"
+msgstr "EML形式で保存…"
+
+#: src/window.vala:10066
+msgid "Cancel Send"
+msgstr "送信をキャンセル"
+
+#: src/window.vala:10202
+msgid "New Subfolder"
+msgstr "新しいサブフォルダ"
+
+#: src/window.vala:10203
+#, c-format
+msgid "The folder will be created under “%s”."
+msgstr "フォルダは「%s」内に作成されます。"
+
+#: src/window.vala:10206
+msgid "Create"
+msgstr "作成"
+
+#: src/window.vala:10213 src/window.vala:10250 src/signature-editor.vala:30
+msgid "Name"
+msgstr "名前"
+
+#: src/window.vala:10240
+msgid "Rename Folder"
+msgstr "フォルダの名称変更"
+
+#: src/window.vala:10241
+#, c-format
+msgid "Choose a new name for “%s”."
+msgstr "「%s」の新しい名前を選んでください。"
+
+#: src/window.vala:10244
+msgid "Rename"
+msgstr "名前の変更"
+
+#: src/window.vala:10278
+#, c-format
+msgid "A folder named “%s” already exists."
+msgstr "「%s」という名前のフォルダはすでに存在します。"
+
+#: src/window.vala:10426
+#, c-format
+msgid "Move “%s” to Trash?"
+msgstr "「%s」をゴミ箱に移動しますか？"
+
+#: src/window.vala:10428
+msgid ""
+"The folder and its subfolders will be moved to Trash. You can restore them "
+"from there."
+msgstr ""
+"フォルダとフォルダ内のサブフォルダはゴミ箱に移動されます。これは、ゴミ箱から"
+"復元することができます。"
+
+#: src/window.vala:10429
+msgid "The folder will be moved to Trash. You can restore it from there."
+msgstr ""
+"フォルダはゴミ箱に移動されます。これは、ゴミ箱から復元することができます。"
+
+#: src/window.vala:10484
+#, c-format
+msgid "Delete “%s” permanently?"
+msgstr "「%s」を完全に削除しますか？"
+
+#: src/window.vala:10485
+msgid "This cannot be undone."
+msgstr "この操作は取り消すことができません。"
+
+#: src/window.blp:5 src/window.blp:294 src/message-reader.vala:569
+#: src/utils.vala:5
+msgid "Letter"
+msgstr "Letter"
+
+#: src/window.blp:79 src/preferences-dialog.vala:238
+msgid "Add Account"
+msgstr "アカウントを追加"
+
+#: src/window.blp:123 src/window.blp:135 src/welcome-tour.vala:34
+msgid "Online Accounts"
+msgstr "オンラインアカウント"
+
+#: src/window.blp:130
+msgid "No Mail Accounts"
+msgstr "メールアカウントなし"
+
+#: src/window.blp:131
+msgid ""
+"Add Google, Microsoft 365, or IMAP in GNOME Settings. Letter uses the same "
+"accounts as Calendar and Contacts."
+msgstr ""
+"GNOME設定で、Google、Microsoft 365、またはIMAPを追加してください。Letterは、"
+"カレンダーや連絡先と同じアカウントを使用します。"
+
+#: src/window.blp:161
+msgid ""
+"This pane shows only the accounts and services enabled in GNOME Online "
+"Accounts. Add or change mail accounts there."
+msgstr ""
+"このペインには、GNOME Online Accountsで有効になっているアカウントとサービスの"
+"みが表示されます。メールアカウントの追加や変更は、そこで行ってください。"
+
+#: src/window.blp:187
+msgid "Toggle Sidebar"
+msgstr "サイドバーの表示/非表示の切り替え"
+
+#: src/window.blp:191
+msgid "Folders"
+msgstr "フォルダ"
+
+#: src/window.blp:198
+msgid "Select an Account"
+msgstr "アカウントを選択"
+
+#: src/window.blp:199
+msgid "Choose an account in the sidebar to load its folders."
+msgstr ""
+"サイドバーからアカウントを選択すると、そのアカウントのフォルダが表示されま"
+"す。"
+
+#: src/window.blp:260
+msgid "New"
+msgstr "新規"
+
+#: src/window.blp:300
+msgid "Main Menu"
+msgstr "メインメニュー"
+
+#: src/window.blp:308
+msgid "Updating…"
+msgstr "更新中..."
+
+#: src/window.blp:380
+msgid "_Refresh"
+msgstr "_更新"
+
+#: src/window.blp:385
+msgid "_New Message"
+msgstr "_新しいメッセージ"
+
+#: src/window.blp:392
+msgid "_Print"
+msgstr "_印刷"
+
+#: src/window.blp:397
+msgid "_Fullscreen"
+msgstr "_全画面"
+
+#: src/window.blp:404
+msgid "_Online Accounts…"
+msgstr "_オンラインアカウント…"
+
+#: src/window.blp:409
+msgid "_Calendar"
+msgstr "_カレンダー"
+
+#: src/window.blp:414
+msgid "C_ontacts"
+msgstr "連_絡先"
+
+#: src/window.blp:421
+msgid "_Preferences"
+msgstr "_設定"
+
+#: src/window.blp:426
+msgid "_Welcome"
+msgstr "_ようこそ"
+
+#: src/window.blp:431
+msgid "_Keyboard Shortcuts"
+msgstr "_キーボードショートカット"
+
+#: src/window.blp:436
+msgid "_About Letter"
+msgstr "_Letterについて"
+
+#: src/account.vala:12
+msgid "IMAP"
+msgstr "IMAP"
+
+#: src/account.vala:14
+msgid "Google"
+msgstr "Google"
+
+#: src/account.vala:16
+msgid "Microsoft 365"
+msgstr "Microsoft 365"
+
+#: src/account.vala:18
+msgid "Exchange"
+msgstr "Exchange"
+
+#: src/account.vala:20
+msgid "On this computer"
+msgstr "このコンピュータ"
+
+#: src/account.vala:22
+msgid "Other"
+msgstr "その他"
+
+#: src/account-row.vala:17
+msgid "Email enabled"
+msgstr "メール機能が有効です"
+
+#: src/account-row.vala:19
+msgid "Calendar enabled"
+msgstr "カレンダーが有効です"
+
+#: src/account-row.vala:21
+msgid "Address book enabled"
+msgstr "アドレス帳が有効です"
+
+#: src/account-row.vala:227 src/conversation.vala:790
+msgid "Bookmarked"
+msgstr "ブックマーク"
+
+#: src/account-row.vala:234 src/conversation.vala:795
+msgid "Important"
+msgstr "重要"
+
+#: src/account-row.vala:336 src/preferences-dialog.vala:83
+msgid "Mark as read"
+msgstr "既読にする"
+
+#: src/conversation.vala:210
+#, c-format
+msgid "%s, %s +%u"
+msgstr "%s, %s +%u"
+
+#: src/conversation.vala:785 src/mail-session.vala:6950
+#: src/message-reader.vala:539
+msgid "Attachment"
+msgstr "添付ファイル"
+
+#: src/conversation.vala:821
+msgid "From me"
+msgstr "私から"
+
+#: src/conversation.vala:833
+msgid "Forwarded"
+msgstr "転送済み"
+
+#: src/conversation.vala:836
+msgid "Sent"
+msgstr "送信済み"
+
+#: src/conversation.vala:839
+msgid "Received"
+msgstr "受信済み"
+
+#: src/mail-session.vala:156 src/mail-session.vala:228
+#, c-format
+msgid "No data source found for UID “%s”"
+msgstr "UID「%s」に対応するデータソースが見つかりませんでした"
+
+#: src/mail-session.vala:202
+#, c-format
+msgid "%s authentication failed"
+msgstr "%sの認証に失敗しました"
+
+#: src/mail-session.vala:290
+msgid ""
+"Password prompts are not implemented yet. Add the account in GNOME Online "
+"Accounts."
+msgstr ""
+"現在、パスワードの入力を求める画面はまだ実装されていません。GNOME Online "
+"Accountsでアカウントを追加してください。"
+
+#: src/mail-session.vala:297
+msgid "This built-in local account is not used. Choose an online account."
+msgstr ""
+"このビルトインのローカルアカウントは使用されません。オンラインアカウントを選"
+"択してください。"
+
+#: src/mail-session.vala:303
+msgid "This account is not yet available to Evolution Data Server."
+msgstr "このアカウントは、Evolution Data Serverでは利用できません。"
+
+#: src/mail-session.vala:309 src/mail-session.vala:6291
+#: src/mail-session.vala:6319
+#, c-format
+msgid "Mail source “%s” was not found."
+msgstr "メールの送信元「%s」が見つかりませんでした。"
+
+#: src/mail-session.vala:314 src/mail-session.vala:6324
+msgid "The account has no mail backend."
+msgstr "このアカウントにはメールバックエンドがありません。"
+
+#: src/mail-session.vala:469
+msgctxt "Mail folder"
+msgid "Inbox"
+msgstr "受信トレイ"
+
+#: src/mail-session.vala:473
+msgctxt "Mail folder"
+msgid "Drafts"
+msgstr "下書き"
+
+#: src/mail-session.vala:476
+msgctxt "Mail folder"
+msgid "Sent"
+msgstr "送信済み"
+
+#: src/mail-session.vala:479
+msgctxt "Mail folder"
+msgid "Trash"
+msgstr "ゴミ箱"
+
+#: src/mail-session.vala:482
+msgctxt "Mail folder"
+msgid "Junk"
+msgstr "迷惑メール"
+
+#: src/mail-session.vala:485
+msgctxt "Mail folder"
+msgid "All Mail"
+msgstr "すべてのメール"
+
+#: src/mail-session.vala:488
+msgctxt "Mail folder"
+msgid "Starred"
+msgstr "スター付き"
+
+#: src/mail-session.vala:491
+msgctxt "Mail folder"
+msgid "Important"
+msgstr "重要"
+
+#: src/mail-session.vala:494
+msgctxt "Mail folder"
+msgid "Archive"
+msgstr "アーカイブ"
+
+#: src/mail-session.vala:497
+msgctxt "Mail folder"
+msgid "Outbox"
+msgstr "送信トレイ"
+
+#: src/mail-session.vala:2252 src/mail-session.vala:2289
+msgid "This message is still syncing with the server. Try again in a moment."
+msgstr ""
+"このメッセージは現在サーバーと同期中です。しばらくしてからもう一度お試しくだ"
+"さい。"
+
+msgid "This copy is no longer on the server."
+msgstr "このコピーはサーバー上に存在しません。"
+
+#: src/mail-session.vala:2261 src/mail-session.vala:2298
+msgid "Message could not be opened."
+msgstr "メッセージを開くことができませんでした。"
+
+#: src/mail-session.vala:3875
+msgid "Could not locate Trash folder"
+msgstr "「ごみ箱」フォルダが見つかりませんでした"
+
+#: src/mail-session.vala:3956
+msgid "Messages moved to Trash."
+msgstr "メッセージがゴミ箱に移動されました。"
+
+#: src/mail-session.vala:5370
+msgid "Enter a folder name."
+msgstr "フォルダ名を入力してください。"
+
+#: src/mail-session.vala:5373
+msgid "Folder names cannot contain slashes."
+msgstr "フォルダ名にはスラッシュ(斜線)を含めることはできません。"
+
+#: src/mail-session.vala:5468
+#, c-format
+msgid "“%s” is a local view, not a mail folder."
+msgstr "「%s」はローカルビューであり、メールフォルダではありません。"
+
+#: src/mail-session.vala:5481
+#, c-format
+msgid "Folder “%s” was not found."
+msgstr "フォルダ「%s」が見つかりませんでした。"
+
+#: src/mail-session.vala:5528
+msgid "This account has no local mail library."
+msgstr "このアカウントにはローカルのメールライブラリがありません。"
+
+#: src/mail-session.vala:5646
+msgid "Refusing to delete files outside Letter’s library."
+msgstr "Letterのライブラリ外にあるファイルの削除を拒否します。"
+
+#: src/mail-session.vala:5715
+msgid "Add at least one recipient."
+msgstr "受信者を少なくとも1人追加してください。"
+
+#: src/mail-session.vala:6305 src/mail-session.vala:6313
+#, c-format
+msgid "No outgoing server is configured for “%s”."
+msgstr "「%s」には送信サーバーが設定されていません。"
+
+#: src/mail-session.vala:6404
+msgid "No Drafts folder was found for this account."
+msgstr "このアカウントには「下書き」フォルダが見つかりませんでした。"
+
+#: src/mail-session.vala:6405
+msgid "No Sent folder was found for this account."
+msgstr "このアカウントには「送信済み」フォルダが見つかりませんでした。"
+
+#: src/mail-session.vala:6596
+#, c-format
+msgid ""
+"“%s” is not a valid email address. Group and personal names need a full "
+"address like name@example.com."
+msgstr ""
+"「%s」は有効なメールアドレスではありません。グループ名や個人名の場合は、"
+"「name@example.com」のように完全なアドレスを指定する必要があります。"
+
+#: src/mail-session.vala:6597
+msgid "recipient"
+msgstr "受信者"
+
+#: src/mail-session.vala:6752 src/utils.vala:1044 src/utils.vala:1610
+msgid "Unknown sender"
+msgstr "差出人不明"
+
+#: src/mail-session.vala:6805
+msgid "This message has no readable content."
+msgstr "このメッセージには読み取りできる内容がありません。"
+
+#: src/mail-session.vala:6950
+msgid "Forwarded message"
+msgstr "転送されたメッセージ"
+
+#: src/notifier.vala:103 src/notifier.vala:109
+msgid "Open"
+msgstr "開く"
+
+#: src/message-reader.vala:63
+msgid "Important message"
+msgstr "重要なメッセージ"
+
+#: src/message-reader.vala:120 src/utils.vala:1657
+msgid "To:"
+msgstr "宛先:"
+
+#: src/message-reader.vala:123 src/utils.vala:1665
+msgid "Cc:"
+msgstr "Cc:"
+
+#: src/message-reader.vala:140
+msgid "Remote images are blocked until you trust this sender."
+msgstr "この送信者を信頼するまでリモート画像の表示はブロックされます。"
+
+#: src/message-reader.vala:141
+msgid "Trust Sender"
+msgstr "送信者を信頼"
+
+#: src/message-reader.vala:367
+msgid "Could Not Open Message"
+msgstr "メッセージを開くことができませんでした"
+
+#: src/message-reader.vala:528 src/compose-dialog.vala:995
+#: src/compose-dialog.vala:1012
+msgid "From"
+msgstr "差出人:"
+
+#: src/message-reader.vala:529
+msgid "Date"
+msgstr "日付"
+
+#: src/message-reader.vala:531 src/compose-dialog.vala:135
+msgid "To"
+msgstr "宛先:"
+
+#: src/message-reader.vala:533 src/compose-dialog.vala:136
+msgid "Cc"
+msgstr "Cc"
+
+#: src/message-reader.vala:541
+msgid "Attachments"
+msgstr "添付ファイル"
+
+#: src/message-reader.vala:666
+msgid "Download All"
+msgstr "すべてダウンロード"
+
+#: src/message-reader.vala:673
+msgid "Save all attachments"
+msgstr "すべての添付ファイルを保存"
+
+#: src/message-reader.vala:766
+msgid "View Image"
+msgstr "画像を表示"
+
+msgid "Save Image As…"
+msgstr "名前を付けて画像を保存…"
+
+msgid "Forward Image"
+msgstr "画像を転送"
+
+msgid "Save Image"
+msgstr "画像を保存"
+
+#: src/message-reader.vala:935
+msgid "Write to"
+msgstr "メッセージを送信:"
+
+#: src/message-reader.vala:936
+msgid "Copy Email"
+msgstr "メールをコピー"
+
+#: src/message-reader.vala:996
+msgid "Address copied"
+msgstr "連絡先がコピーされました"
+
+#: src/message-reader.vala:1141
+msgid "Show less"
+msgstr "表示を減らす"
+
+#: src/message-reader.vala:1142
+msgid "Show fewer recipients"
+msgstr "受信者の数を減らす"
+
+#: src/message-reader.vala:1144 src/message-reader.vala:1186
+#, c-format
+msgid "+ %u"
+msgstr "+ %u"
+
+#: src/message-reader.vala:1146
+#, c-format
+msgid "%u more recipient"
+msgid_plural "%u more recipients"
+msgstr[0] "さらに%u人の受信者"
+
+#: src/attachment-chip.vala:51
+msgid "Preview"
+msgstr "プレビュー"
+
+#: src/attachment-chip.vala:57 src/signature-editor.vala:19 src/utils.vala:419
+msgid "Save"
+msgstr "保存"
+
+#: src/attachment-chip.vala:89
+#, c-format
+msgid "Preview or save “%s”"
+msgstr "「%s」をプレビューまたは保存"
+
+#: src/attachment-chip.vala:99
+#, c-format
+msgid "Remove “%s”"
+msgstr "「%s」を削除"
+
+#: src/compose-dialog.vala:104
+msgid "Send"
+msgstr "送信"
+
+#: src/compose-dialog.vala:113 src/compose-dialog.vala:610
+msgid "Save Draft"
+msgstr "下書きを保存"
+
+#: src/compose-dialog.vala:137 src/compose-dialog.vala:964
+msgid "Bcc"
+msgstr "Bcc"
+
+#: src/compose-dialog.vala:146
+msgid "Subject"
+msgstr "件名"
+
+#: src/compose-dialog.vala:162 src/compose-dialog.vala:1035
+msgid "Signature"
+msgstr "署名"
+
+#: src/compose-dialog.vala:495
+msgid "Include original attachments?"
+msgstr "元の添付ファイルを含めますか？"
+
+#: src/compose-dialog.vala:497
+msgid ""
+"You added someone who did not receive the original message. Attach the file "
+"from that message?"
+msgid_plural ""
+"You added someone who did not receive the original message. Attach the files "
+"from that message?"
+msgstr[0] ""
+"元のメッセージを受け取っていない人を追加しました。そのメッセージのファイルを"
+"添付しますか？"
+
+#: src/compose-dialog.vala:502
+msgid "Don't Attach"
+msgstr "添付しない"
+
+#: src/compose-dialog.vala:503 src/compose-dialog.vala:1615
+msgid "Attach"
+msgstr "添付する"
+
+#: src/compose-dialog.vala:603
+msgid "Save changes to draft?"
+msgstr "変更内容を下書きに保存しますか？"
+
+#: src/compose-dialog.vala:603
+msgid "Save this message as a draft?"
+msgstr "このメッセージを下書きとして保存しますか？"
+
+#: src/compose-dialog.vala:605
+msgid "Your latest edits will update the draft in Drafts."
+msgstr "最新の編集内容は、「下書き」にある下書きに反映されます。"
+
+#: src/compose-dialog.vala:606
+msgid "It will be stored in Drafts so you can finish it later."
+msgstr "「下書き」に保存されるので、後から仕上げることができます。"
+
+#: src/compose-dialog.vala:608
+msgid "Discard"
+msgstr "破棄する"
+
+#: src/compose-dialog.vala:609
+msgid "Keep Editing"
+msgstr "編集を続ける"
+
+#: src/compose-dialog.vala:610
+msgid "Save Changes"
+msgstr "変更を保存"
+
+#: src/compose-dialog.vala:716
+msgid "Saved to Drafts"
+msgstr "「下書き」に保存されました"
+
+#: src/compose-dialog.vala:782
+msgid "Mail is not ready to send yet."
+msgstr "メールがまだ送信できる状態ではありません。"
+
+#: src/compose-dialog.vala:821
+msgid "Queued in Outbox"
+msgstr "「送信トレイ」に保留中"
+
+#: src/compose-dialog.vala:871 src/format-toolbar.vala:25
+msgid "Font"
+msgstr "フォント"
+
+#: src/compose-dialog.vala:882 src/compose-dialog.vala:2239
+#: src/compose-dialog.vala:2413 src/format-toolbar.vala:36
+msgid "Small"
+msgstr "小さい"
+
+#: src/compose-dialog.vala:883 src/format-toolbar.vala:37
+msgid "Normal"
+msgstr "通常"
+
+#: src/compose-dialog.vala:884 src/format-toolbar.vala:38
+msgid "Large"
+msgstr "大きい"
+
+#: src/compose-dialog.vala:885 src/format-toolbar.vala:39
+msgid "Huge"
+msgstr "とても大きい"
+
+#: src/compose-dialog.vala:891 src/format-toolbar.vala:44
+msgid "Font size"
+msgstr "フォントの大きさ"
+
+#: src/compose-dialog.vala:911 src/format-toolbar.vala:66
+msgid "Bold"
+msgstr "太字"
+
+#: src/compose-dialog.vala:912 src/format-toolbar.vala:67
+msgid "Italic"
+msgstr "斜体"
+
+#: src/compose-dialog.vala:913 src/format-toolbar.vala:68
+msgid "Underline"
+msgstr "下線"
+
+#: src/compose-dialog.vala:914 src/format-toolbar.vala:69
+msgid "Strikethrough"
+msgstr "取り消し線"
+
+#: src/compose-dialog.vala:923
+msgid "Bullet list (Tab indents, Shift+Tab outdents)"
+msgstr "箇条書き(Tabキーでインデント、Shift+Tabキーでインデント解除)"
+
+#: src/compose-dialog.vala:928
+msgid "Numbered list (Tab indents, Shift+Tab outdents)"
+msgstr "番号付きリスト(Tabキーでインデント、Shift+Tabキーでインデント解除)"
+
+#: src/compose-dialog.vala:931
+msgid "Decrease Indent"
+msgstr "インデントを縮小"
+
+#: src/compose-dialog.vala:932
+msgid "Increase Indent"
+msgstr "インデントを拡大"
+
+#: src/compose-dialog.vala:934 src/compose-dialog.vala:4083
+#: src/format-toolbar.vala:76
+msgid "Insert Image"
+msgstr "画像を挿入"
+
+#: src/compose-dialog.vala:940
+msgid "Attach file"
+msgstr "ファイルを添付"
+
+#: src/compose-dialog.vala:949 src/compose-dialog.vala:957
+msgid "High priority"
+msgstr "最優先"
+
+#: src/compose-dialog.vala:956 src/compose-dialog.vala:960
+msgid "High priority (on)"
+msgstr "最優先(有効)"
+
+#: src/compose-dialog.vala:966
+msgid "Show Bcc"
+msgstr "Bccを表示"
+
+#: src/compose-dialog.vala:1130 src/compose-dialog.vala:2493
+#: src/format-toolbar.vala:150
+msgid "Insert Emoji"
+msgstr "絵文字を挿入"
+
+#: src/compose-dialog.vala:1148 src/compose-dialog.vala:1264
+msgid "Highlight"
+msgstr "ハイライト"
+
+#: src/compose-dialog.vala:1148 src/compose-dialog.vala:1264
+#: src/format-toolbar.vala:168
+msgid "Text Color"
+msgstr "文字の色"
+
+#: src/compose-dialog.vala:1179
+msgid "No Highlight"
+msgstr "ハイライトなし"
+
+#: src/compose-dialog.vala:1179 src/format-toolbar.vala:191
+msgid "Default Color"
+msgstr "既定の色"
+
+#: src/compose-dialog.vala:1195
+msgid "Yellow"
+msgstr "イエロー"
+
+#: src/compose-dialog.vala:1195 src/compose-dialog.vala:1203
+#: src/format-toolbar.vala:209
+msgid "Green"
+msgstr "グリーン"
+
+#: src/compose-dialog.vala:1195 src/compose-dialog.vala:1203
+#: src/format-toolbar.vala:209
+msgid "Blue"
+msgstr "ブルー"
+
+#: src/compose-dialog.vala:1195
+msgid "Pink"
+msgstr "ピンク"
+
+#: src/compose-dialog.vala:1195 src/compose-dialog.vala:1202
+#: src/format-toolbar.vala:208
+msgid "Orange"
+msgstr "オレンジ"
+
+#: src/compose-dialog.vala:1195 src/compose-dialog.vala:1203
+#: src/format-toolbar.vala:209
+msgid "White"
+msgstr "ホワイト"
+
+#: src/compose-dialog.vala:1202 src/format-toolbar.vala:208
+msgid "Black"
+msgstr "ブラック"
+
+#: src/compose-dialog.vala:1202 src/format-toolbar.vala:208
+msgid "Gray"
+msgstr "グレイ"
+
+#: src/compose-dialog.vala:1202 src/format-toolbar.vala:208
+msgid "Red"
+msgstr "レッド"
+
+#: src/compose-dialog.vala:1202 src/format-toolbar.vala:208
+msgid "Gold"
+msgstr "ゴールド"
+
+#: src/compose-dialog.vala:1203 src/format-toolbar.vala:209
+msgid "Purple"
+msgstr "パープル"
+
+#: src/compose-dialog.vala:1214
+msgid "Custom Color…"
+msgstr "カスタムカラー"
+
+#: src/compose-dialog.vala:1290 src/format-toolbar.vala:233
+msgid "Sans Serif"
+msgstr "サンセリフ"
+
+#: src/compose-dialog.vala:1291 src/format-toolbar.vala:235
+msgid "Serif"
+msgstr "セリフ"
+
+#: src/compose-dialog.vala:1292 src/format-toolbar.vala:237
+msgid "Monospace"
+msgstr "モノスペース"
+
+#: src/compose-dialog.vala:1404
+msgid "None"
+msgstr "なし"
+
+#: src/compose-dialog.vala:1468
+msgid "Attach Files"
+msgstr "ファイルを添付"
+
+#: src/compose-dialog.vala:1499 src/compose-dialog.vala:1591
+msgid "Folders cannot be attached."
+msgstr "フォルダを添付することはできません。"
+
+#: src/compose-dialog.vala:1529
+#, c-format
+msgid "Could not attach “%s”."
+msgstr "「%s」を添付できませんでした。"
+
+#: src/compose-dialog.vala:1611
+msgid "Attach or insert this image?"
+msgstr "この画像を添付しますか、それとも挿入しますか？"
+
+#: src/compose-dialog.vala:1612
+#, c-format
+msgid "“%s” can be attached to the message or placed in the body."
+msgstr "「%s」はメッセージに添付することも、本文に記述することもできます。"
+
+#: src/compose-dialog.vala:1616
+msgid "Insert"
+msgstr "挿入"
+
+#: src/compose-dialog.vala:1652
+msgid "The image was resized to stay under 2 MB."
+msgstr "画像が2MB以下になるようサイズが調整されました。"
+
+#: src/compose-dialog.vala:1655
+#, c-format
+msgid "Could not insert “%s”."
+msgstr "「%s」を挿入できませんでした。"
+
+#: src/compose-dialog.vala:1685
+#, c-format
+msgid ""
+"“%s” is too large to attach. Use a file transfer service and send the link "
+"instead."
+msgstr ""
+"「%s」はサイズが大きすぎるため添付できません。ファイル転送サービスを利用し"
+"て、リンクを送信してください。"
+
+#: src/compose-dialog.vala:1689
+#, c-format
+msgid ""
+"%u files are too large to attach. Use a file transfer service and send the "
+"links instead."
+msgstr ""
+"%u ファイルはサイズが大きすぎるため添付できません。ファイル転送サービスを利用"
+"して、リンクを送ってください。"
+
+#: src/compose-dialog.vala:2026
+msgid "Pasted image"
+msgstr "貼り付けられた画像"
+
+#: src/compose-dialog.vala:2240 src/compose-dialog.vala:2414
+msgid "Medium"
+msgstr "中"
+
+#: src/compose-dialog.vala:2241 src/compose-dialog.vala:2415
+msgid "Original"
+msgstr "オリジナル"
+
+#: src/compose-dialog.vala:2248
+msgid "Image size"
+msgstr "画像のサイズ"
+
+#: src/compose-dialog.vala:2352 src/compose-dialog.vala:2381
+msgid "Paste and Match Style"
+msgstr "貼り付けて書式を合わせる"
+
+#: src/compose-dialog.vala:2400 src/compose-dialog.vala:2495
+msgid "Add to Dictionary"
+msgstr "辞書に追加"
+
+#: src/compose-dialog.vala:2408
+msgid "Remove Link"
+msgstr "リンクを削除"
+
+#: src/compose-dialog.vala:2418
+msgid "Image Size"
+msgstr "画像のサイズ"
+
+#: src/compose-dialog.vala:2497
+msgid "Ignore Spelling"
+msgstr "スペルチェックを無視"
+
+#: src/compose-dialog.vala:4086
+msgid "Images"
+msgstr "画像"
+
+#: src/recipient-editor.vala:51 src/recipient-editor.vala:180
+#: src/search-field.vala:114 src/contact-picker.vala:115
+msgid "Address book"
+msgstr "アドレス帳"
+
+#: src/recipient-editor.vala:51 src/search-field.vala:114
+#: src/contact-picker.vala:115 src/contact-picker.vala:127
+msgid "Recent recipient"
+msgstr "最近の受信者"
+
+#: src/recipient-editor.vala:192
+msgid "Searching"
+msgstr "検索中"
+
+#: src/search-query.vala:99 src/search-query.vala:110
+#, c-format
+msgid "From: %s"
+msgstr "差出人: %s"
+
+#: src/search-query.vala:101 src/search-query.vala:112
+#, c-format
+msgid "To: %s"
+msgstr "宛先: %s"
+
+#: src/search-query.vala:103 src/search-query.vala:114
+#, c-format
+msgid "Contains: %s"
+msgstr "内容: %s"
+
+#: src/search-query.vala:139
+#, c-format
+msgid "Search all folders. Filter with %s, %s and %s"
+msgstr "すべてのフォルダを検索します。%s、%s、%s で絞り込みます"
+
+#: src/search-query.vala:140 src/search-query.vala:285
+msgctxt "Search filter"
+msgid "contains:"
+msgstr "内容:"
+
+#: src/search-query.vala:141 src/search-query.vala:287
+msgctxt "Search filter"
+msgid "from:"
+msgstr "差出人:"
+
+#: src/search-query.vala:142 src/search-query.vala:289
+msgctxt "Search filter"
+msgid "to:"
+msgstr "宛先:"
+
+#: src/search-field.vala:92
+msgid "Search sender"
+msgstr "差出人を検索"
+
+#: src/search-field.vala:96
+msgid "Search recipients"
+msgstr "受信者を検索"
+
+#: src/search-field.vala:100
+msgid "Search everywhere"
+msgstr "すべての場所を検索"
+
+#: src/search-field.vala:235
+msgid "Clear search"
+msgstr "検索をクリア"
+
+#: src/search-field.vala:434
+msgid "Remove"
+msgstr "削除"
+
+#: src/preferences-dialog.vala:44 src/preferences-dialog.vala:270
+msgid "GNOME integration"
+msgstr "GNOME統合"
+
+#: src/preferences-dialog.vala:45
+msgid ""
+"Letter reads the same Evolution Data Server used by Calendar and Contacts, "
+"and the same GNOME Online Accounts for Google, Microsoft 365, and IMAP."
+msgstr ""
+"Letterは、カレンダーや連絡先で使用されているのと同様のEvolution Data Server、"
+"およびGoogle、Microsoft 365、IMAP用の同じGNOME Online Accountsを読み込みま"
+"す。"
+
+#: src/preferences-dialog.vala:48
+msgid "Mail accounts"
+msgstr "メールアカウント"
+
+#: src/preferences-dialog.vala:49
+msgid "Calendars"
+msgstr "カレンダー"
+
+#: src/preferences-dialog.vala:50
+msgid "Address books"
+msgstr "アドレス帳"
+
+#: src/preferences-dialog.vala:53 src/preferences-dialog.vala:271
+msgid "Reading"
+msgstr "閲覧"
+
+#: src/preferences-dialog.vala:56
+msgid "Reading pane"
+msgstr "閲覧ウィンドウ"
+
+#: src/preferences-dialog.vala:57
+msgid "Beside the list, below it, or hidden."
+msgstr "リストの横または下に配置するか、非表示にすることができます。"
+
+#: src/preferences-dialog.vala:60
+msgid "On the right"
+msgstr "右側"
+
+#: src/preferences-dialog.vala:61
+msgid "Below the list"
+msgstr "リストの下"
+
+#: src/preferences-dialog.vala:62
+msgid "Hidden"
+msgstr "非表示"
+
+#: src/preferences-dialog.vala:84
+msgid "When an open message is marked as read."
+msgstr "未読のメッセージが既読としてマークされたとき。"
+
+#: src/preferences-dialog.vala:87
+msgid "On selection"
+msgstr "選択時"
+
+#: src/preferences-dialog.vala:88
+msgid "After 5 seconds"
+msgstr "5秒後"
+
+#: src/preferences-dialog.vala:89
+msgid "Never"
+msgstr "しない"
+
+#: src/preferences-dialog.vala:110
+msgid "Conversations"
+msgstr "会話"
+
+#: src/preferences-dialog.vala:111
+msgid "Group related messages into threads."
+msgstr "メッセージをスレッドごとにまとめます。"
+
+msgid "Appearance"
+msgstr "外観"
+
+msgid "Application theme"
+msgstr "アプリケーションのテーマ"
+
+msgid "Choose your personal experience."
+msgstr "お好みに合わせたテーマを選択できます。"
+
+msgid "Light"
+msgstr "明るいスタイル"
+
+msgid "Dark"
+msgstr "暗いスタイル"
+
+msgid "Reading mode"
+msgstr "閲覧時のモード"
+
+msgid "Choose the background colour of the message body."
+msgstr "メッセージ本文の背景色を選択できます。"
+
+msgid "Always light"
+msgstr "常に明るいスタイル"
+
+msgid "Follow system"
+msgstr "システムのスタイルに従う"
+
+msgid "Accounts rail"
+msgstr "アカウントバー"
+
+msgid "Customise the account sidebar."
+msgstr "アカウントのサイドバーをカスタマイズできます。"
+
+msgid "Theme colour"
+msgstr "テーマカラー"
+
+msgid "Hide"
+msgstr "隠す"
+
+#: src/preferences-dialog.vala:120 src/preferences-dialog.vala:123
+#: src/preferences-dialog.vala:272
+msgid "Notifications"
+msgstr "通知"
+
+#: src/preferences-dialog.vala:124
+msgid "Desktop alerts for new mail."
+msgstr "新着メールが届いたときに、デスクトップ通知を表示します。"
+
+#: src/preferences-dialog.vala:135
+msgid "Notification sound"
+msgstr "通知音"
+
+#: src/preferences-dialog.vala:138
+msgid "Default"
+msgstr "既定"
+
+#: src/preferences-dialog.vala:139 src/utils.vala:373 src/utils.vala:382
+#: src/eml-viewer.vala:19 src/eml-viewer.vala:35
+msgid "Message"
+msgstr "メッセージ"
+
+#: src/preferences-dialog.vala:140
+msgid "Complete"
+msgstr "コンプリート"
+
+#: src/preferences-dialog.vala:141
+msgid "Bell"
+msgstr "ベル"
+
+#: src/preferences-dialog.vala:142 src/preferences-dialog.vala:572
+msgid "Custom file…"
+msgstr "カスタムファイル"
+
+#: src/preferences-dialog.vala:143
+msgid "Silent"
+msgstr "消音"
+
+#: src/preferences-dialog.vala:149
+msgid "Play the selected sound"
+msgstr "選択された音声を再生します"
+
+#: src/preferences-dialog.vala:162
+msgid "Aggregate sound"
+msgstr "総合サウンド"
+
+#: src/preferences-dialog.vala:163
+msgid ""
+"On: one sound for all new mail in a check cycle. Off: a sound for every new "
+"message."
+msgstr ""
+"オンの場合: チェックサイクル内のすべての新着メールに対して1回の通知音が鳴りま"
+"す。オフの場合: 新着メッセージごとに1回の通知音が鳴ります。"
+
+#: src/preferences-dialog.vala:173 src/preferences-dialog.vala:273
+msgid "Synchronization"
+msgstr "同期"
+
+#: src/preferences-dialog.vala:174
+msgid ""
+"Headers stay local for every folder. Bodies and attachments are kept only "
+"for the period you choose. The first sync can take a while; after that, "
+"folders stay up to date."
+msgstr ""
+"ヘッダーは各フォルダごとにローカルで保存されます。本文と添付ファイルは、指定"
+"した期間のみ保存されます。最初の同期には時間がかかる場合がありますが、完了後"
+"はフォルダが常に最新の状態に保たれます。"
+
+#: src/preferences-dialog.vala:178
+msgid "Check for new mail"
+msgstr "新着メールの確認"
+
+#: src/preferences-dialog.vala:181
+msgid "Every minute"
+msgstr "1分ごと"
+
+#: src/preferences-dialog.vala:182
+msgid "Every 5 minutes"
+msgstr "5分ごと"
+
+#: src/preferences-dialog.vala:183
+msgid "Every 15 minutes"
+msgstr "15分ごと"
+
+#: src/preferences-dialog.vala:184
+msgid "Every 30 minutes"
+msgstr "30分ごと"
+
+#: src/preferences-dialog.vala:185
+msgid "Manually (F5)"
+msgstr "手動 (F5)"
+
+#: src/preferences-dialog.vala:200
+msgid "Download message bodies"
+msgstr "メッセージ本文のダウンロード"
+
+#: src/preferences-dialog.vala:203
+msgid "Last 2 months"
+msgstr "過去2ヶ月間"
+
+#: src/preferences-dialog.vala:204
+msgid "Last 6 months"
+msgstr "過去6か月間"
+
+#: src/preferences-dialog.vala:205
+msgid "Last year"
+msgstr "過去1年間"
+
+#: src/preferences-dialog.vala:206
+msgid "Download all"
+msgstr "すべてダウンロード"
+
+#: src/preferences-dialog.vala:221 src/preferences-dialog.vala:274
+msgid "Local library"
+msgstr "ローカルライブラリ"
+
+#: src/preferences-dialog.vala:222
+msgid ""
+"Letter caches headers and full messages (bodies and attachments) for every "
+"folder in the window below. First fill can take hours; Inbox checks and "
+"sending stay responsive. Progress resumes after restart."
+msgstr ""
+"Letterは、下のウィンドウに表示されているすべてのフォルダについて、ヘッダーと"
+"メッセージ全体（本文および添付ファイル）をキャッシュします。最初の読み込みに"
+"は数時間かかる場合がありますが、受信トレイの確認や送信操作は通常通り行えま"
+"す。再起動後も進行状況は引き継がれます。"
+
+#: src/preferences-dialog.vala:225
+msgid "Disk used"
+msgstr "ディスクの使用量"
+
+#: src/preferences-dialog.vala:232 src/preferences-dialog.vala:275
+msgid "Accounts"
+msgstr "アカウント"
+
+#: src/preferences-dialog.vala:233
+msgid ""
+"Add or remove providers in GNOME Settings. Changes appear here automatically."
+msgstr ""
+"GNOMEの設定でプロバイダを追加または削除すると、自動的にここに反映されます。"
+
+#: src/preferences-dialog.vala:239
+msgid "Google, Microsoft 365, Exchange, IMAP"
+msgstr "Google, Microsoft 365, Exchange, IMAP"
+
+#: src/preferences-dialog.vala:251
+msgid "Dependencies and recommended packages"
+msgstr "依存関係と推奨パッケージ"
+
+#: src/preferences-dialog.vala:252
+msgid "Check the software requirements for Letter to work correctly."
+msgstr "Letterが正常に動作するためのソフトウェア要件を確認します。"
+
+#: src/preferences-dialog.vala:276 src/dependency-page.vala:26
+msgid "Dependencies"
+msgstr "依存関係"
+
+#: src/preferences-dialog.vala:381
+msgid "How often to refresh mail while Letter is open."
+msgstr "Letterを開いている間、メールをどのくらいの頻度で更新するか。"
+
+#: src/preferences-dialog.vala:385
+msgid "Very frequent checks may hit server rate limits."
+msgstr ""
+"チェックの頻度が高すぎると、サーバーのレート制限に引っかかる可能性がありま"
+"す。"
+
+#: src/preferences-dialog.vala:395
+msgid ""
+"Applies to all folders (Inbox, Archive, Sent, Trash, custom, …). Older "
+"bodies are trimmed at startup; headers stay for the message list."
+msgstr ""
+"すべてのフォルダ(受信トレイ、アーカイブ、送信済み、ゴミ箱、カスタムフォルダな"
+"ど)に適用されます。起動時に古い本文は削除されますが、メッセージ一覧にはヘッ"
+"ダーが残ります。"
+
+#: src/preferences-dialog.vala:399
+msgid "Downloading everything can take time and fill the disk."
+msgstr ""
+"すべてダウンロードすると、時間がかかるだけでなく、ディスクの容量を圧迫する可"
+"能性があります。"
+
+#: src/preferences-dialog.vala:430
+msgid "Open this account in GNOME Settings"
+msgstr "GNOMEの設定でこのアカウントを開く"
+
+#: src/preferences-dialog.vala:441 src/signature-editor.vala:136
+msgid "Signatures"
+msgstr "署名"
+
+#: src/preferences-dialog.vala:467
+msgid "Reset"
+msgstr "リセット"
+
+#: src/preferences-dialog.vala:471
+msgid "Delete Letter’s local copy and rebuild it from the server"
+msgstr "Letterのローカルコピーを削除し、サーバーから再構築する"
+
+#: src/preferences-dialog.vala:493
+#, c-format
+msgid "Reset “%s”?"
+msgstr "「%s」をリセットしますか？"
+
+#: src/preferences-dialog.vala:494
+#, c-format
+msgid ""
+"This deletes Letter’s local library for this account (%s). Messages stay on "
+"the server. The next sync rebuilds headers and recent bodies from scratch. "
+"Use this if the account is damaged or stuck."
+msgstr ""
+"これにより、このアカウント(%s)のLetterのローカルライブラリが削除されます。"
+"メッセージはサーバー上に残ります。次回の同期では、ヘッダーと最近の本文が最初"
+"から再構築されます。アカウントが破損している場合や動作が停止している場合は、"
+"この操作を行ってください。"
+
+#: src/preferences-dialog.vala:497
+msgid "Reset Local Library"
+msgstr "ローカルライブラリをリセット"
+
+#: src/preferences-dialog.vala:508
+msgid "Open a Letter window first, then try again."
+msgstr "まずLetterのウィンドウを開いてから、もう一度試してください。"
+
+#: src/preferences-dialog.vala:520
+#, c-format
+msgid "Local library cleared. Letter is rebuilding “%s”."
+msgstr ""
+"ローカルライブラリがリセットされました。現在、「%s」の再構築が進行中です。"
+
+#: src/preferences-dialog.vala:574
+msgid "No notification sound."
+msgstr "通知音は鳴りません。"
+
+#: src/preferences-dialog.vala:576
+msgid "Played with new-mail alerts."
+msgstr "新着メールの通知時に再生されます。"
+
+#: src/preferences-dialog.vala:609
+msgid "Audio files"
+msgstr "オーディオファイル"
+
+#: src/preferences-dialog.vala:626
+msgid "All files"
+msgstr "すべてのファイル"
+
+#: src/preferences-dialog.vala:635
+msgid "Choose a sound"
+msgstr "オーディオを選択"
+
+#: src/signature-editor.vala:16
+msgid "New Signature"
+msgstr "新しい署名"
+
+#: src/signature-editor.vala:16
+msgid "Edit Signature"
+msgstr "署名を編集"
+
+#: src/signature-editor.vala:62
+msgid ""
+"The signature is added after two blank lines and a -- mark, before any "
+"quoted reply."
+msgstr ""
+"署名は2行の空白行と「--」のマークの後に、引用された返信の直前に追加されます。"
+
+#: src/signature-editor.vala:142
+msgid "Add Signature"
+msgstr "署名を追加"
+
+#: src/signature-editor.vala:150
+msgid ""
+"Each account has its own signatures. Star the one that should be added to "
+"new messages. You can still pick another signature while writing."
+msgstr ""
+"各アカウントにはそれぞれ独自の署名があります。新しいメッセージに追加したい署"
+"名にスターをつけてください。メッセージの作成中に、別の署名を選択することも可"
+"能です。"
+
+#: src/signature-editor.vala:179
+msgid "No signatures yet"
+msgstr "署名がありません"
+
+#: src/signature-editor.vala:180
+msgid "Add a signature to use it when writing messages from this account."
+msgstr ""
+"このアカウントからメッセージを送信する際に使用する署名を追加してください。"
+
+#: src/signature-editor.vala:200
+msgid "Default for new messages. Click to stop using it automatically."
+msgstr "新規メッセージのデフォルト設定です。クリックすることで、自動での使用を停止できます。"
+
+#: src/signature-editor.vala:201
+msgid "Use as the default for new messages from this account"
+msgstr "このアカウントからの新規メッセージのデフォルト設定として使用する"
+
+#: src/signature-editor.vala:260
+#, c-format
+msgid "Delete “%s”?"
+msgstr "「%s」を削除しますか？"
+
+#: src/signature-editor.vala:261
+msgid ""
+"This signature will no longer be available when writing messages from this "
+"account."
+msgstr ""
+"このアカウントからメッセージを作成する際、この署名は使用できなくなります。"
+
+#: src/utils.vala:4
+msgid "Letter (Development)"
+msgstr "Letter(開発)"
+
+#: src/utils.vala:314
+#, c-format
+msgid "The attachment “%s” is empty."
+msgstr "添付ファイル「%s」は空です。"
+
+#: src/utils.vala:361
+msgid "Save Attachment"
+msgstr "添付ファイルを保存"
+
+#: src/utils.vala:390
+msgid "Save as EML"
+msgstr "EML形式で保存"
+
+#: src/utils.vala:396
+msgid "Email Message"
+msgstr "メールメッセージ"
+
+#: src/utils.vala:418
+msgid "Save Attachments"
+msgstr "添付ファイルを保存"
+
+#: src/utils.vala:487 src/utils.vala:492 src/utils.vala:498 src/utils.vala:519
+msgid "The image could not be opened."
+msgstr "画像を開くことができませんでした。"
+
+#: src/utils.vala:1653
+#, c-format
+msgid "On %s, %s wrote"
+msgstr "%sに、%sが書きました"
+
+#: src/utils.vala:2353
+#, c-format
+msgid "“%s” is not a valid email address."
+msgstr "「%s」は有効なメールアドレスではありません。"
+
+#: src/utils.vala:2354
+msgid "Check the recipients. At least one address is not valid."
+msgstr "受信者を確認してください。少なくとも1つのアドレスが無効です。"
+
+#: src/utils.vala:2358
+msgid "You do not have permission to send this message."
+msgstr "このメッセージを送信する権限がありません。"
+
+#: src/utils.vala:2361
+msgid "The mailbox is full. The message could not be sent."
+msgstr "メールボックスが満杯です。メッセージを送信できませんでした。"
+
+#: src/utils.vala:2364
+msgid "The server took too long to respond. Try again."
+msgstr "サーバーの応答に時間がかかりすぎました。もう一度お試しください。"
+
+#: src/utils.vala:2367
+msgid "Could not reach the mail server. Check your connection."
+msgstr "メールサーバーに到達できませんでした。接続状態を確認してください。"
+
+#: src/utils.vala:2370
+msgid "The message was not sent."
+msgstr "メッセージが送信されませんでした。"
+
+#: src/utils.vala:2372
+msgid "The message could not be sent."
+msgstr "メッセージを送信できませんでした。"
+
+#: src/welcome-dialog.vala:21
+msgid "Welcome"
+msgstr "ようこそ"
+
+#: src/welcome-tour.vala:21
+msgid "Welcome to Letter"
+msgstr "Letterへようこそ"
+
+#: src/welcome-tour.vala:22
+msgid ""
+"Letter is the email application designed for the GNOME desktop and "
+"integrates with Calendar and Contacts. It uses the same accounts you already "
+"have: Google, Microsoft 365, Exchange, IMAP."
+msgstr ""
+"Letterは、GNOMEデスクトップ環境のために設計されたメールアプリケーションで、カ"
+"レンダーや連絡先と連携しています。Google、Microsoft 365、Exchange、IMAPなど、"
+"すでにお持ちのアカウントをそのまま利用できます。"
+
+#: src/welcome-tour.vala:26
+msgid "One experience, one interface"
+msgstr "ひとつの体験を、ひとつのインターフェースで"
+
+#: src/welcome-tour.vala:27
+msgid ""
+"Sign-in stays in Online Accounts in GNOME Settings. Evolution Data Server "
+"handles the mail flow. Letter uses the GTK 4 and libadwaita libraries, so "
+"GNOME 50 or later is required for it to work correctly."
+msgstr ""
+"ログイン情報は、GNOME設定の「オンラインアカウント」に保存されます。メールの送"
+"受信は Evolution Data Serverによって処理されます。Letterは GTK 4および "
+"libadwaitaライブラリを使用しているため、正常に動作させるには GNOME 50以降が必"
+"要です。"
+
+#: src/welcome-tour.vala:31
+msgid "What Letter needs"
+msgstr "Letterに必要なもの"
+
+#: src/welcome-tour.vala:32
+msgid ""
+"Add at least one mail account in Settings → Online Accounts. IMAP is added "
+"there too. Microsoft 365 also needs the evolution-ews package. Without "
+"Online Accounts, Letter has nothing to show — by design."
+msgstr ""
+"「設定」→「オンラインアカウント」で、少なくとも1つのメールアカウントを追加し"
+"てください。IMAPもそこで追加可能です。Microsoft 365を利用するには、evolution-"
+"ewsパッケージも必要です。「オンラインアカウント」がない場合、Letterには何も表"
+"示されません。これは仕様によるものです。"
+
+#: src/welcome-tour.vala:48
+msgid "Back"
+msgstr "戻る"
+
+#: src/welcome-tour.vala:54 src/welcome-tour.vala:100
+msgid "Next"
+msgstr "進む"
+
+#: src/welcome-tour.vala:100
+msgid "Get Started"
+msgstr "はじめよう"
+
+#: src/outbox-store.vala:246
+msgid "Sending failed"
+msgstr "送信に失敗しました"
+
+#: src/outbox-store.vala:274
+msgid "The sending account is unavailable."
+msgstr "送信元のアカウントが利用できません。"
+
+#: src/theme-selector.vala:10
+msgid "Follow the system appearance"
+msgstr "システムのスタイルに従う"
+
+#: src/theme-selector.vala:11
+msgid "Light appearance"
+msgstr "明るいスタイル"
+
+#: src/theme-selector.vala:12
+msgid "Dark appearance"
+msgstr "暗いスタイル"
+
+#: src/invitation-bar.vala:19 src/invitation-bar.vala:137
+msgid "Meeting Invitation"
+msgstr "ミーティングの招待"
+
+#: src/invitation-bar.vala:40 src/invitation-bar.vala:104
+msgid "This event is waiting for your reply."
+msgstr "このイベントについて、ご返信をお待ちしております。"
+
+#: src/invitation-bar.vala:48
+msgid "Accept"
+msgstr "承認"
+
+#: src/invitation-bar.vala:53
+msgid "Tentative"
+msgstr "検討"
+
+#: src/invitation-bar.vala:57
+msgid "Decline"
+msgstr "拒否"
+
+#: src/invitation-bar.vala:100 src/calendar-store.vala:31
+msgid "This meeting was cancelled."
+msgstr "このミーティングは中止になりました。"
+
+#: src/invitation-bar.vala:133
+msgid "Meeting Cancelled"
+msgstr "ミーティングは中止されました"
+
+#: src/invitation-bar.vala:135
+msgid "Meeting Response"
+msgstr "ミーティング応答"
+
+#: src/invitation-bar.vala:145
+msgid "Accepted. The organizer will be notified."
+msgstr "承認しました。主催者へ通知されます。"
+
+#: src/invitation-bar.vala:146 src/calendar-store.vala:37
+msgid "This meeting was accepted."
+msgstr "このミーティングは承認されました。"
+
+#: src/invitation-bar.vala:149
+msgid "Marked as tentative. The organizer will be notified."
+msgstr "検討としてマークされました。主催者へ通知されます。"
+
+#: src/invitation-bar.vala:150 src/calendar-store.vala:39
+msgid "This meeting was marked as tentative."
+msgstr "このミーティングは検討としてマークされました。"
+
+#: src/invitation-bar.vala:153
+msgid "Declined. The organizer will be notified."
+msgstr "拒否しました。主催者へ通知されます。"
+
+#: src/invitation-bar.vala:154 src/calendar-store.vala:41
+msgid "This meeting was declined."
+msgstr "このミーティングは拒否されました。"
+
+#: src/invitation-bar.vala:156 src/calendar-store.vala:34
+#: src/calendar-store.vala:43
+msgid "This is a meeting response."
+msgstr "これはミーティングへの応答です。"
+
+#: src/calendar-store.vala:45
+msgid "This message is a meeting invitation."
+msgstr "このメッセージはミーティングへの招待です。"
+
+#: src/calendar-store.vala:77
+msgid "This invitation could not be read."
+msgstr "この招待を読み取ることができませんでした。"
+
+#: src/calendar-store.vala:115
+msgid "Meeting"
+msgstr "ミーティング"
+
+#: src/calendar-store.vala:191 src/calendar-store.vala:195
+msgid "No calendar is available for this account."
+msgstr "このアカウントではカレンダーを利用できません。"
+
+#: src/calendar-store.vala:205
+msgid "Could not open the calendar."
+msgstr "カレンダーを開くことができませんでした。"
+
+#: src/eml-viewer.vala:63
+msgid "This file is empty."
+msgstr "このファイルは空です。"
+
+#: src/eml-viewer.vala:68
+msgid "Could not read this message file."
+msgstr "このメッセージファイルを読み取ることができませんでした。"
+
+#: src/dependency-page.vala:14 src/dependency-page.vala:159
+msgid "Debian / Ubuntu"
+msgstr "Debian / Ubuntu"
+
+#: src/dependency-page.vala:16 src/dependency-page.vala:160
+msgid "Fedora"
+msgstr "Fedora"
+
+#: src/dependency-page.vala:18 src/dependency-page.vala:161
+msgid "Arch Linux"
+msgstr "Arch Linux"
+
+#: src/dependency-page.vala:29
+msgid ""
+"Letter is made for the GNOME desktop from version 50 onward and makes full "
+"use of the GTK 4 and libadwaita libraries. A normal GNOME installation "
+"already includes everything needed to make it work. Check the essential "
+"packages below, and the optional ones only if you need them."
+msgstr ""
+"Letterはバージョン50以降のGNOMEデスクトップ環境向けに開発されており、GTK 4お"
+"よびlibadwaitaライブラリをフル活用しています。通常のGNOMEインストール環境に"
+"は、動作に必要なものがすべて含まれています。以下の必須パッケージを確認し、オ"
+"プションパッケージは必要な場合のみインストールしてください。"
+
+#: src/dependency-page.vala:32
+msgid ""
+"You are running the Flatpak build. Recommended packages are installed on the "
+"host system (outside the sandbox); Letter checks the host for them."
+msgstr ""
+"Flatpakビルドを実行しています。推奨パッケージはホストシステム(サンドボックス"
+"外)にインストールされており、Letterはホスト上でそれらのパッケージを確認しま"
+"す。"
+
+#: src/dependency-page.vala:42
+msgid "Essential"
+msgstr "必須"
+
+#: src/dependency-page.vala:49
+msgid "Recommended"
+msgstr "おすすめ"
+
+#: src/dependency-page.vala:94
+msgid "GNOME Online Accounts"
+msgstr "GNOMEオンラインアカウント"
+
+#: src/dependency-page.vala:95
+msgid "Account sign-in for Google, Microsoft 365, Exchange, and IMAP"
+msgstr ""
+"Google、Microsoft 365、Exchange、およびIMAPアカウントへのサインインを行います"
+
+#: src/dependency-page.vala:102
+msgid "Evolution Data Server"
+msgstr "Evolution Data Server"
+
+#: src/dependency-page.vala:103
+msgid "Mail, calendar, and contacts backend used by Letter"
+msgstr "Letterで使用されているメール、カレンダー、連絡先のバックエンドです"
+
+#: src/dependency-page.vala:116
+msgid "Microsoft Graph backends"
+msgstr "Microsoft Graphバックエンド"
+
+#: src/dependency-page.vala:118
+msgid ""
+"Graph mail is bundled in this Flatpak. Install evolution-ews on the host if "
+"you also want Microsoft 365 calendar and contacts via the desktop."
+msgstr ""
+"このFlatpakにはGraph Mailが同梱されています。デスクトップからMicrosoft 365の"
+"カレンダーや連絡先も利用したい場合は、ホストにevolution-ewsをインストールして"
+"ください。"
+
+#: src/dependency-page.vala:119
+msgid "evolution-ews for Microsoft 365 mail, calendar, and contacts"
+msgstr "Microsoft 365のメール、カレンダー、連絡先向けevolution-ewsです"
+
+#: src/dependency-page.vala:129
+msgid "Hunspell"
+msgstr "Hunspell"
+
+#: src/dependency-page.vala:131
+msgid ""
+"Spell checking in the compose editor. Install Hunspell and a dictionary for "
+"your language on the host."
+msgstr ""
+"作成エディタでのスペルチェックです。Hunspellと、お使いの言語に合わせた辞書を"
+"インストールしてください。"
+
+#: src/dependency-page.vala:132
+msgid ""
+"Spell checking in the compose editor. Install Hunspell plus a dictionary for "
+"your language."
+msgstr ""
+"作成エディタでのスペルチェックです。Hunspellと、お使いの言語に合わせた辞書を"
+"インストールしてください。"
+
+#: src/dependency-page.vala:142
+msgid "Sushi"
+msgstr "Sushi"
+
+#: src/dependency-page.vala:144
+msgid ""
+"Quick attachment preview via the host Sushi / Nautilus Previewer. Without "
+"it, Letter opens the file in the default application."
+msgstr ""
+"ホストの「Sushi / Nautilus Previewer」による添付ファイルのクイックプレビュー"
+"です。これが設定されていない場合、Letterはデフォルトのアプリケーションでファ"
+"イルを開きます。"
+
+#: src/dependency-page.vala:145
+msgid ""
+"Quick attachment preview. Without it, Letter opens the file in the default "
+"application."
+msgstr ""
+"添付ファイルのクイックプレビューです。これがインストールされていない場合、"
+"Letterはファイルをデフォルトのアプリケーションで開きます。"
+
+#: src/dependency-page.vala:156
+msgid ""
+"Install Hunspell and the dictionary for your language. Enchant is pulled in "
+"automatically."
+msgstr ""
+"Hunspellとお使いの言語に合わせた辞書をインストールしてください。Enchantは自動"
+"的に読み込まれます。"
+
+#: src/dependency-page.vala:157
+msgid ""
+"Search your package manager for hunspell- followed by the language code."
+msgstr ""
+"パッケージマネージャーで、「hunspell-」の後に言語コードが続くものを検索してく"
+"ださい。"
+
+#: src/dependency-page.vala:158
+msgid "Examples: hunspell-it, hunspell-en-us, hunspell-fr, hunspell-de-de."
+msgstr "例: hunspell-it、hunspell-en-us、hunspell-fr、hunspell-de-de。"
+
+#: src/dependency-page.vala:162
+msgid "The compose editor uses the same language as the desktop."
+msgstr "作成エディタは、デスクトップ版と同じ言語を使用しています。"
+
+#: src/dependency-page.vala:213
+msgid "Installed"
+msgstr "インストール済み"
+
+#: src/dependency-page.vala:213
+msgid "Missing"
+msgstr "未インストール"
+
+#: src/contact-picker.vala:14
+msgid "Address Book"
+msgstr "アドレス帳"
+
+#: src/contact-picker.vala:22
+msgid "Search contacts"
+msgstr "連絡先を検索"
+
+#: src/contact-picker.vala:45 src/contact-picker.vala:88
+msgid "No Contacts"
+msgstr "連絡先なし"
+
+#: src/contact-picker.vala:46 src/contact-picker.vala:91
+msgid "Type a name or email to search the address book."
+msgstr "アドレス帳を検索するには、名前またはメールアドレスを入力してください。"
+
+#: src/contact-picker.vala:88
+msgid "No Matching Contacts"
+msgstr "一致する連絡先はありません"
+
+#: src/contact-picker.vala:90
+msgid "Try a different name or email address."
+msgstr "別の名前またはメールアドレスをお試しください。"
