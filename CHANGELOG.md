@@ -27,6 +27,8 @@ refactors unless they affect behaviour.
 - Drag messages from the list onto a folder to move them. Multi-select and
   conversations only move mail that belongs to the open folder; the drag icon
   shows how many.
+- Move mail window has now a live filter serch for fast selecting a folder. Useful 
+  if you have a large number of custom folders.
 
 
 ### Fixed
@@ -45,8 +47,8 @@ refactors unless they affect behaviour.
 
 ### Changed
 
-- Search clear control is a bit larger and shows a hover background, closer to
-  the system search-entry affordance.
+- The global search box now has a UI consistent with the system's search fields.
+- New mail and send buttons now has a border radius consitent with the rest of the app.
 
 
 ## [1.5.0](https://github.com/stalvatero/letter/compare/v1.0.0...v1.5.0) - 2026-10-08

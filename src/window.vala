@@ -8845,11 +8845,32 @@ public class Mail.Window : Adw.ApplicationWindow {
         dialog.set_response_appearance ("move", Adw.ResponseAppearance.SUGGESTED);
         dialog.set_response_enabled ("move", false);
 
+        var search = new Gtk.SearchEntry () {
+            hexpand = true,
+            placeholder_text = _("Search folders"),
+        };
+        search.stop_search.connect (() => dialog.close ());
         var list = new Gtk.ListBox () {
             selection_mode = Gtk.SelectionMode.SINGLE,
             valign = Gtk.Align.START,
         };
         list.add_css_class ("boxed-list");
+        list.set_placeholder (new Gtk.Label (_("No matching folders.")) {
+            margin_top = 12,
+            margin_bottom = 12,
+        });
+        list.set_filter_func ((row) => {
+            var query = search.text.casefold ().strip ();
+            if (query.length == 0)
+                return true;
+
+            var pick = row as FolderPickRow;
+            if (pick == null)
+                return false;
+            return pick.mail_folder.name.casefold ().contains (query)
+                || pick.mail_folder.full_name.casefold ().contains (query);
+        });
+
         Folder? picked = null;
         for (uint i = 0; i < folders.length; i++) {
             var folder = folders[i];
@@ -8867,11 +8888,26 @@ public class Mail.Window : Adw.ApplicationWindow {
             dialog.set_response_enabled ("move", picked != null);
         });
 
+        search.changed.connect (() => {
+            list.invalidate_filter ();
+            list.unselect_all ();
+            picked = null;
+            dialog.set_response_enabled ("move", false);
+        });
+
         var scrolled = new Gtk.ScrolledWindow () {
             min_content_height = 280,
             child = list,
         };
-        dialog.extra_child = scrolled;
+        var content = new Gtk.Box (Gtk.Orientation.VERTICAL, 8);
+        content.append (search);
+        content.append (scrolled);
+        dialog.extra_child = content;
+
+        Idle.add (() => {
+            search.grab_focus ();
+            return Source.REMOVE;
+        });
 
         var response = yield dialog.choose (parent, null);
         return response == "move" ? picked : null;
@@ -10739,4 +10775,33 @@ private class Mail.PendingTransferUndo {
     public GenericArray<TransferUndoItem> items;
     public Adw.Toast? toast;
     public bool resolved;
+}
+
+public class Mail.MessageDragPaintable : Object, Gdk.Paintable {
+    private Gdk.Texture texture;
+    private int logical_width;
+    private int logical_height;
+
+    public MessageDragPaintable (Gdk.Texture texture, int logical_width, int logical_height) {
+        this.texture = texture;
+        this.logical_width = logical_width;
+        this.logical_height = logical_height;
+    }
+
+    public void snapshot (Gdk.Snapshot snapshot, double width, double height) {
+        var gtk = snapshot as Gtk.Snapshot;
+        if (gtk == null)
+            return;
+        var bounds = Graphene.Rect ();
+        bounds.init (0, 0, (float) width, (float) height);
+        gtk.append_texture (this.texture, bounds);
+    }
+
+    public int get_intrinsic_width () {
+        return this.logical_width;
+    }
+
+    public int get_intrinsic_height () {
+        return this.logical_height;
+    }
 }

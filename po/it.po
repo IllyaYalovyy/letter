@@ -726,6 +726,14 @@ msgstr "Scegli dove spostare i messaggi selezionati."
 msgid "Choose where to move this message."
 msgstr "Scegli dove spostare questo messaggio."
 
+#: src/window.vala:8850
+msgid "Search folders"
+msgstr "Cerca cartelle"
+
+#: src/window.vala:8857
+msgid "No matching folders."
+msgstr "Nessuna cartella trovata."
+
 #: src/window.vala:8925
 msgid "Move to Folder"
 msgstr "Sposta nella cartella"
