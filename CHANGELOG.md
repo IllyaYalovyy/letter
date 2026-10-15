@@ -18,6 +18,7 @@ refactors unless they affect behaviour.
 
 
 ## [Unreleased](https://github.com/stalvatero/letter/compare/v1.6.0...HEAD)
+- Nothing for now.
 
 
 ## [1.6.0](https://github.com/stalvatero/letter/compare/v1.5.0...v1.6.0)
@@ -31,7 +32,7 @@ refactors unless they affect behaviour.
 - Drag messages from the list onto a folder to move them. Multi-select and
   conversations only move mail that belongs to the open folder; the drag icon
   shows how many.
-- Move mail window has now a live filter serch for fast selecting a folder. Useful 
+- Move mail window has now a live filter search for fast selecting a folder. Useful 
   if you have a large number of custom folders.
 
 
