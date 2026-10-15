@@ -56,6 +56,17 @@
     <category>Email</category>
   </categories>
   <releases>
+    <release version="1.6.0" type="stable" date="2026-10-15">
+      <description>
+        <p>
+          Adds a Japanese translation, optional account pictures, drag-and-drop
+          message moves, and live folder search in the Move dialog. Improves
+          remote-content privacy and adds opt-in recovery for trusted HTTPS
+          images with incomplete certificate chains, alongside mail sync and
+          search refinements.
+        </p>
+      </description>
+    </release>
     <release version="1.5.0" type="stable" date="2026-10-08">
       <description>
         <p>

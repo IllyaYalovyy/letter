@@ -7,7 +7,7 @@ and this project follows [Semantic Versioning](https://semver.org/).
 
 How we maintain it:
 
-- During development, add bullets under **[Unreleased](https://github.com/stalvatero/letter/compare/v1.5.0...HEAD)**.
+- During development, add bullets under **[Unreleased](https://github.com/stalvatero/letter/compare/v1.6.0...HEAD)**.
 - On each release (rc or stable), rename that section to the version + date, and
 copy a short summary into `data/io.github.stalvatero.Letter.metainfo.xml.in.in`
 (`<releases>`, leave msgstr empty in po files — keep release notes in English)
@@ -17,10 +17,14 @@ refactors unless they affect behaviour.
 
 
 
-## [Unreleased](https://github.com/stalvatero/letter/compare/v1.5.0...HEAD)
+## [Unreleased](https://github.com/stalvatero/letter/compare/v1.6.0...HEAD)
+
+
+## [1.6.0](https://github.com/stalvatero/letter/compare/v1.5.0...v1.6.0)
 
 ### Added
 
+- Japanese translation by [Kansa_Fu](https://github.com/Kansa-fu).
 - Preferences → **Appearance** → **Account pictures** shows profile pictures
   (Google and Microsoft 365) or initials in the accounts rail. Off by default.
   Thanks to [Illya Yalovyy](https://github.com/IllyaYalovyy).
@@ -37,6 +41,14 @@ refactors unless they affect behaviour.
   network. Remote stylesheets, fonts, audio, video, frames and page redirects
   were still loaded and could tell the sender the message was opened.
   Replies and forwards to such mail no longer load its remote images.
+  Thanks to [Illya Yalovyy](https://github.com/IllyaYalovyy).
+- FIX - Recover HTTPS images with missing intermediate certificates
+  HTTPS images fail when servers omit intermediate certificates. Trusting 
+  the sender does not repair the certificate chain. Add optional recovery
+  for trusted senders, off by default because some revocation checks are
+  unavailable. Check certificate trust, hostname, expiry, and key usage.
+  Prevent proxy bypass, limit downloads, and release recovered images when
+  switching messages. All 10 tests pass, and native rendering confirms image recovery.
   Thanks to [Illya Yalovyy](https://github.com/IllyaYalovyy).
 - After a finished server refresh, Letter trusts the shorter folder list when
   Camel’s local UID summary was already roughly in line with Letter — so

@@ -1,7 +1,7 @@
 project(
   'letter',
   ['vala', 'c'],
-  version: '1.5.0',
+  version: '1.6.0',
   license: 'GPL-3.0-or-later',
   meson_version: '>= 1.3',
   default_options: [
